@@ -125,13 +125,13 @@ class HomeCardController extends Controller
 
          
         $destopImage  = $Homepage->banner;
-        if($request->file('destopImage')){
+        if($request->hasFile('destopImage')){
             $destopImage = time().'.'.$request->destopImage->getClientOriginalExtension();
             $request->destopImage->move(public_path('images'), $destopImage);
 
         }
         $mobileImage  = $Homepage->banner2;
-        if($request->file('mobileIMage')){
+        if($request->hasFile('mobileIMage')){
             $mobileImage = time().'.'.$request->mobileIMage->getClientOriginalExtension();
             $request->mobileIMage->move(public_path('images'), $mobileImage);
 
