@@ -122,9 +122,9 @@ class HomeCardController extends Controller
         $keyword = Keyword::where('page_id', $Homepage->id)->get();
 
         $CustomAdd = CustomAdd::where('page_id', $Homepage->id)->get();
-
+        // dd($Homepage);
          
-        $destopImage  = $Homepage->banner;
+        $destopImage  = $Homepage->banner1;
         if($request->hasFile('destopImage')){
             $destopImage = time().'.'.$request->destopImage->getClientOriginalExtension();
             $request->destopImage->move(public_path('images'), $destopImage);
