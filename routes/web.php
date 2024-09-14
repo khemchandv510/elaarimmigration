@@ -86,12 +86,29 @@ Route::middleware('auth')->group(function () {
     Route::post('products/add', [ProductController::class, 'saveProduct'])->name('product.save');
 
     Route::get('products/{id}', [ProductController::class, 'Details'])->name('product.detail');
+    Route::get('products-delete/{id}', [ProductController::class, 'Delete_product'])->name('product.delete');
+
 
     Route::post('products/{id}', [ProductController::class, 'productUpdate'])->name('product.update');
 
     Route::get('sub-categories/{id}', [CategoryController::class, 'getSubCategory'])->name('category.get-subcategory');
 
     Route::post('save-faq', [FaqController::class, 'saveFaq'])->name('faq.save');
+    Route::post('update-faq', [FaqController::class, 'updateFaqData'])->name('faq.update');
+
+    
+    Route::post('keywords-update', [FaqController::class, 'KeywordsUpdate'])->name('keywords.update');
+    Route::get('get-keyword-details/{id}', [FaqController::class, 'KeywordsDetails'])->name('keywords.details');
+
+    
+    Route::get('get-custom-adds-details/{id}', [FaqController::class, 'customAddsDetails']);
+    Route::post('custom-adds-update', [FaqController::class, 'customAddsUpdate'])->name('customadd.update');
+
+    
+    Route::get('custom-adds-delete/{id}', [FaqController::class, 'customAddsDetete'])->name('customadds.delete');
+
+    
+    
     Route::post('save-page-content', [FaqController::class, 'savePageContent'])->name('pagecontent.save');
     
     Route::post('edit-page-content', [FaqController::class, 'editPageContent'])->name('pagecontent.edit');
@@ -118,6 +135,9 @@ Route::middleware('auth')->group(function () {
     
     
     Route::get('get-faq/{id}', [FaqController::class, 'pageContentDetails'])->name('faq.details');
+
+    Route::get('get-faq-details/{id}', [FaqController::class, 'FaqDetails'])->name('faqs.details');
+
     
     
     Route::get('blogs/', [BlogController::class, 'index'])->name('blog.index');
@@ -169,6 +189,9 @@ Route::middleware('auth')->group(function () {
          
          Route::get('delete/{id}', [HomeCardController::class , 'delete' ])->name('card.delete');
     });
+
+    Route::get('/home-page', [HomeCardController::class , 'homePage' ])->name('card.homepage');
+    Route::post('/home-page', [HomeCardController::class , 'updateHomePage' ]);
 
 
     

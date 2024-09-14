@@ -9,6 +9,11 @@ use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\SubSubCategory;
 use App\Models\HomepageCard;
+use App\Models\Faq;
+use App\Models\PageContent;
+use App\Models\Keyword;
+use App\Models\CustomAdd;
+use App\Models\Page;
 
 class HomeCardController extends Controller
 {
@@ -63,8 +68,6 @@ class HomeCardController extends Controller
     
     public function update(Request $request, $id){
         
-        
-        
         HomepageCard::where('id', $id)->update([
             'category_id' => $request->category,
             'add_link' => $request->add_link,
@@ -87,6 +90,75 @@ class HomeCardController extends Controller
             return redirect()->route('card.index');
 
         // return view('cards.create', compact('category'));
+    }
+
+
+    public function delete(Request $request, $id){
+        HomepageCard::where('id', $id)->delete();
+        return back();
+    }
+
+
+    public function homePage(Request $request){
+        $Homepage = Page::where('id', 1)->first();
+        // dd($page);
+        $faqs = Faq::where('page_id', $Homepage->id)->get();
+        $pageContent = PageContent::where('page_id', $Homepage->id)->get();
+        $keyword = Keyword::where('page_id', $Homepage->id)->get();
+
+        $CustomAdd = CustomAdd::where('page_id', $Homepage->id)->get();
+
+        // dd($page);
+        return view('home-page', compact('Homepage', 'faqs', 'pageContent', 'keyword', 'CustomAdd'));
+
+    }
+
+
+    public function updateHomePage(Request $request){
+
+        $Homepage = Page::where('id', $request->page_id )->first();
+        $faqs = Faq::where('page_id', $Homepage->id)->get();
+        $pageContent = PageContent::where('page_id', $Homepage->id)->get();
+        $keyword = Keyword::where('page_id', $Homepage->id)->get();
+
+        $CustomAdd = CustomAdd::where('page_id', $Homepage->id)->get();
+
+         
+        $destopImage  = $Homepage->banner;
+        if($request->file('destopImage')){
+            $destopImage = time().'.'.$request->destopImage->getClientOriginalExtension();
+            $request->destopImage->move(public_path('images'), $destopImage);
+
+        }
+        $mobileImage  = $Homepage->banner2;
+        if($request->file('mobileIMage')){
+            $mobileImage = time().'.'.$request->mobileIMage->getClientOriginalExtension();
+            $request->mobileIMage->move(public_path('images'), $mobileImage);
+
+        }
+
+        Page::where('id', $request->page_id)->update([
+            'page_name' => $request->pageName,
+            'banner_title' => $request->bannerTitle,
+            'banner_url' => $request->bannerUrl,
+            'description' => $request->description,
+            'faq_title' => $request->faqtitle,
+            'keyword_title' => $request->customKeyword,
+            'meta_tag' => $request->metatag,
+            'meta_desc' => $request->metadescription,
+            'meta_keywords' => $request->metakeywords,
+            'seo_url' => $request->seourl,
+
+            'head_tag' => $request->scripthead,
+            'body_tag' => $request->scriptBody,
+            'footer_desc' => $request->footerdescription,
+            'banner1' => $destopImage,
+            'banner2' => $mobileImage
+
+        ]);
+
+        return back();
+
     }
 }
 

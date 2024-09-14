@@ -38,6 +38,13 @@ class ProductController extends Controller
         return view('products.details', compact('products', 'category', 'faqs', 'pageContent', 'keyword', 'CustomAdd', 'subCategory', 'subSubCategory'));
     }
 
+
+    public function  Delete_product(Request $request, $id){
+        Product::find($id)->delete();
+        return back();
+    }
+
+
     public function addProduct(Request $request) {
         $category =  Category::where('parent_id', null)->orderby('id', 'desc')->get();
         return view('products.add', compact('category'));

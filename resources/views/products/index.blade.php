@@ -31,6 +31,8 @@
                                 @endif
                             </td>
                             <td><a href="{{route('product.detail', $category->id)}}"><i class="fa fa-edit" aria-hidden="true"></i></a> 
+
+                            <a href="{{route('product.delete', $category->id )}}"> <i class="fa fa-trash" aria-hidden="true"></i>  </a>
                             </td>
                         </tr>
                     @endforeach

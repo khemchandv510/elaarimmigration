@@ -13,6 +13,7 @@ class Keyword extends Model
         'id',
         'link',
        	'product_id',
+        'page_id',
         'status', 
         'name',
         'updated_at'	

@@ -91,25 +91,16 @@
         </a>
     </li>
     
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('card.homepage') }}">
+            <svg class="nav-icon">
+                <use xlink:href="{{ asset('icons/coreui.svg#cil-speedometer') }}"></use>
+            </svg>
+            {{ __('Home page ') }}
+        </a>
+    </li>
     
-
-    <!--<li class="nav-item">-->
-    <!--    <a class="nav-link" href="{{ url('imports') }}">-->
-    <!--        <svg class="nav-icon">-->
-    <!--            <use xlink:href="{{ asset('icons/coreui.svg#cil-speedometer') }}"></use>-->
-    <!--        </svg>-->
-    <!--        {{ __('Imports') }}-->
-    <!--    </a>-->
-    <!--</li>-->
-
-    <!--<li class="nav-item">-->
-    <!--    <a class="nav-link" href="{{ url('smtp-config') }}">-->
-    <!--        <svg class="nav-icon">-->
-    <!--            <use xlink:href="{{ asset('icons/coreui.svg#cil-speedometer') }}"></use>-->
-    <!--        </svg>-->
-    <!--        {{ __('Smtp configuration') }}-->
-    <!--    </a>-->
-    <!--</li>-->
+    
 
 
 

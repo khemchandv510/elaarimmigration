@@ -12,7 +12,7 @@ class FaqController extends Controller
     public function  saveFaq(Request $request){
 
         $validator = $request->validate([
-            'product_id'      => 'required|numeric',
+            // 'product_id'      => 'required|numeric',
             'faqtitle'      => 'required',
             // 'description' => 'required',
         ]);
@@ -20,10 +20,10 @@ class FaqController extends Controller
         $faq = Faq::create([
             'name' => $request->faqtitle,
             'description' => $request->footerdescription,
-            'product_id' => $request->product_id
-        ]);
+            'product_id' => isset($request->product_id) ? $request->product_id : null ,
+            'page_id' => isset($request->page_id) ? $request->page_id : null
+         ]);
 
-        // dd($faq);
         return back()->with('success', 'Faq has been created successfully.');
     }
 
@@ -31,7 +31,7 @@ class FaqController extends Controller
         $validator = $request->validate([
             'pageImage'      => 'image|mimes:jpeg,png|max:1024',
             'videoLink'      => 'required',
-            'product_id'      => 'required|numeric',
+            // 'product_id'      => 'required|numeric',
         ]);
 
         if($request->file('pageImage')){
@@ -45,6 +45,7 @@ class FaqController extends Controller
             'url' => $request->videoLink,
             'product_title' => $request->titlename,
             'product_id' => $request->product_id,
+            'page_id' => $request->page_id,
             'description' => $request->description,
             'image' => isset($imageName) ? $imageName : null,
         ]);
@@ -55,7 +56,7 @@ class FaqController extends Controller
 
     public function savekeywords(Request $request){
         $validator = $request->validate([
-            'product_id'      => 'required|numeric',
+            // 'product_id'      => 'required|numeric',
             'keywordName'      => 'required',
             'keywordUrl' => 'required',
         ]);
@@ -63,20 +64,28 @@ class FaqController extends Controller
         $faq = Keyword::create([
             'name' => $request->keywordName,
             'link' => $request->keywordUrl,
-            'product_id' => $request->product_id
+            'product_id' => $request->product_id,
+            'page_id' => $request->page_id
+
         ]);
 
         return back()->with('success', 'Keywords has been created successfully.');
     }
 
 
+    public function FaqDetails($id){
+       $faqs =  Faq::where('id', $id)->first();
+       return response()->json(['status' => true,  'data' => $faqs]);
+    }
+
+
     
     public function saveCustomAdds(Request $request){
         $validator = $request->validate([
-            'product_id'      => 'required|numeric',
+            // 'product_id'      => 'required|numeric',
             'addsName'      => 'required',
             'addUrl' => 'required',
-            'pageImage'      => 'image|mimes:jpeg,png|max:1024',
+            // 'pageImage'      => 'image|mimes:jpeg,png|max:1024',
 
         ]);
 
@@ -94,7 +103,8 @@ class FaqController extends Controller
             'image' => isset($imageName) ? $imageName : null,
             'add_name' => $request->addsName,
             'add_url' => $request->addUrl,
-            'product_id' => $request->product_id
+            'product_id' => $request->product_id,
+            'page_id' => $request->page_id
         ]);
 
         return back()->with('success', 'custom adds has been created successfully.');
@@ -158,6 +168,53 @@ class FaqController extends Controller
         return back()->with('success', 'Page content has been created successfully.');
 
     }
+
+    public function updateFaqData(Request $request){
+        Faq::where('id', $request->faqedit_id)->update(['name' => $request->faqtitle, 'description' => $request->footerdescription]);
+        return back();
+    }
     
+
+    public function KeywordsUpdate(Request $request){
+
+        Keyword::where('id', $request->keyword_id)->update(['name' => $request->keywordName, 'link' => $request->keywordUrl ]);
+        return back();
+
+    }   
+
+    public function KeywordsDetails($id){
+       $faq =  Keyword::find($id);
+        return  response()->json(['status' => true, 'data' => $faq]);
+
+    }
+
+    public function customAddsDetails($id){
+        $CustomAdd  = CustomAdd::find($id);
+        return response()->json(['status' => true, 'data' => $CustomAdd]); 
+    }
+
+    
+    public function customAddsDetete($id){
+        $CustomAdd  = CustomAdd::find($id)->delete();
+        return back();
+        // return response()->json(['status' => true, 'data' => $CustomAdd]); 
+    }
+
+    public function customAddsUpdate(Request $request){
+
+        $customadd = CustomAdd::find($request->customEditId);
+        $imageName = $customadd->image;
+        if($request->file('pageImage')){
+
+            $imageName = time().'.'.$request->pageImage->getClientOriginalExtension();
+            $request->pageImage->move(public_path('images'), $imageName);
+
+        }
+
+
+        CustomAdd::where('id', $request->customEditId)->update(['add_name' => $request->addsName , 'add_url' => $request->addUrl,  'image' => $imageName]);
+
+        return back();
+    }
     
 }

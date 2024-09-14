@@ -17,6 +17,7 @@ class PageContent extends Model
        	'url',
         'description', 
         'product_id',
+        'page_id',
         'created_at',
         'product_title'
 

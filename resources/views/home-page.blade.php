@@ -2,66 +2,73 @@
 
 @section('content')
 
-
 @if(Session::has('message'))
 <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
 @endif
 
 
 <div class="card mb-4 col-md-12">
-    <form action="{{route('product.update', $products->id)}}" enctype="multipart/form-data" method="post">
+    <form action="" enctype="multipart/form-data" method="post">
         @csrf
         <div class="card-header">Information</div>
-
+        <input type="hidden" name="page_id" value="{{$Homepage->id}}">
         <div class="card-body">
 
             <div class="form-group">
                 <label for="exampleFormControlInput1">Page Name</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" required name="pageName" value="{{$products->name}}" placeholder="name">
+                <input type="text" class="form-control" id="exampleFormControlInput1" value="{{$Homepage->page_name}}" required name="pageName" placeholder="name">
             </div>
 
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="form-group">
-                        <label for="exampleFormControlInput1">Category</label>
-                        <select type="text" name="category" class="form-control" onchange="getsubcategroy(this.value)" required>
-                            <option value="">None</option>
-                            @foreach($category as $categories)
-                            <option value="{{$categories->id}}" {{ $categories->id == $products->category_id ? 'selected' : '' }} >{{$categories->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
+                        <label for="exampleFormControlInput1">Destop Image </label>
+                        <input type="file" class="form-control"  name="destopImage" placeholder="name">
 
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Sub category</label>
-                        <select type="text" id="subcategory" name="subcategory" class="form-control"  onchange="getsubsubcategroy(this.value)">
-                            <option value="">None</option>
-                            @foreach($subCategory as $categories)
-                            <option value="{{$categories->id}}" {{ $categories->id == $products->sub_category_id ? 'selected' : '' }} >{{$categories->name}}</option>
-                            @endforeach
-                        </select>
+                     <img src="{{ asset('/public/images') }}/{{$Homepage->banner1}}" width="150px">
+
                     </div>
                 </div>
                 
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="form-group">
-                        <label for="exampleFormControlInput1">Sub Sub category</label>
-                        <select type="text" id="subSubcategory" name="subSubcategory" class="form-control" >
-                            <option value="">None</option>
-                             @foreach($subSubCategory as $categories)
-                            <option value="{{$categories->id}}" {{ $categories->id == $products->child_category_id ? 'selected' : '' }} >{{$categories->name}}</option>
-                            @endforeach
-                        </select>
+                        <label for="exampleFormControlInput1">Mobile Image </label>
+                        <input type="file" class="form-control"  name="mobileIMage" placeholder="name">
+                        <img src="{{ asset('/public/images') }}/{{$Homepage->banner2}}" width="150px">
+
                     </div>
                 </div>
+
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Banner Title </label>
+                        <input type="text" class="form-control"  name="bannerTitle" value="{{$Homepage->banner_title}}" placeholder="name">
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Banner Url  </label>
+                        <input type="text" class="form-control"  name="bannerUrl" value="{{$Homepage->banner_url}}">
+                    </div>
+                </div>
+
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Description </label>
+                        <textarea type="file" class="form-control"  name="description" > {{$Homepage->description}} </textarea>
+                    </div>
+                </div>
+
+
             </div>
         </div>
-
-
-        <!-- page content -->
-        <div class="card bg-light mb-3">
+        
+       
+         <!-- page content -->
+         <div class="card bg-light mb-3">
             <div class="card-header">Page content</div>
             <div class="card-body">
 
@@ -115,7 +122,7 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Title</label>
-                    <input type="text" class="form-control" required id="exampleFormControlInput1" value="{{$products->faq_title}}" name="faqtitle" placeholder="">
+                    <input type="text" class="form-control" id="exampleFormControlInput1" value="{{$Homepage->faq_title}}" name="faqtitle" placeholder="">
                 </div>
 
 
@@ -144,7 +151,7 @@
                         <td> {{$faq->name}} </td>
                         <td>
                             
-                         <button type="button" class="btn btn-primary" onclick="editfaq({{$faq->id }})" > <i class="fa fa-edit" aria-hidden="true"></i> </button>
+                        <button type="button" class="btn btn-primary" onclick="editfaq({{$faq->id }})" > <i class="fa fa-edit" aria-hidden="true"></i> </button>
                          
                         <a href="{{route('faq.delete', $faq->id)}}"><i class="fa fa-trash" aria-hidden="true"></i> </a> 
                                             
@@ -169,7 +176,7 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Title</label>
-                    <input type="text" class="form-control" required id="exampleFormControlInput1" value="{{$products->keyword_title}}" name="customKeyword" placeholder="">
+                    <input type="text" class="form-control" required id="exampleFormControlInput1" value="{{$Homepage->keyword_title}}" name="customKeyword" placeholder="">
                 </div>
 
 
@@ -191,14 +198,12 @@
                         <th scope="row">1</th>
                         <td> {{$faq->name}} </td>
                         <td> {{$faq->link}} </td>
-
-                        <td> 
+                        <td>
+                            <button type="button" class="btn btn-primary" onclick="editkeywords({{$faq->id }})" > <i class="fa fa-edit" aria-hidden="true"></i> </button>
                             
-                        <button type="button" class="btn btn-primary" onclick="editkeywords({{$faq->id }})" > <i class="fa fa-edit" aria-hidden="true"></i> </button>
-                        
-                        <a href="{{ route('keyword.delete', $faq->id) }}"><i class="fa fa-trash" aria-hidden="true"></i> </a> 
-                        
-                    </td>
+                            <a href="{{ route('keyword.delete', $faq->id) }}"><i class="fa fa-trash" aria-hidden="true"></i> </a> 
+                            
+                        </td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -213,7 +218,11 @@
         <div class="card bg-light mb-3">
             <div class="card-header">Custom Adds</div>
             <div class="card-body">
+                
+
+
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#customAdd"> Add Custom Add </button>
+
                 
                 <table class="table table-striped">
                     <thead>
@@ -232,11 +241,10 @@
                             <th>  <img src="{{ asset('/public/images') }}/{{$faq->image}}" width="100px"> </td> </th>
                             <td> {{$faq->add_name}} </td>
                             <td> {{$faq->add_url}} </td>
-    
-                            <td>
-                                
-                            <button type="button" class="btn btn-primary" onclick="editCustomAdds({{$faq->id }})" > <i class="fa fa-edit" aria-hidden="true"></i> </button>
 
+                            <td>
+                            <button type="button" class="btn btn-primary" onclick="editCustomAdds({{$faq->id }})" > <i class="fa fa-edit" aria-hidden="true"></i> </button>
+                            
                             <a href="{{ route('customadds.delete', $faq->id) }}"><i class="fa fa-trash" aria-hidden="true"></i> </a> 
                                                 
                             </td>
@@ -249,59 +257,63 @@
         </div>
 
 
+        
+
         <!-- seo information -->
         <div class="card bg-light mb-3">
             <div class="card-header">Seo</div>
             <div class="card-body">
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Meta Tag</label>
-                    <input type="text" name="metatag" class="form-control" id="exampleFormControlInput1" value="{{$products->metaTag}}" placeholder="name">
+                    <input type="text" name="metatag" class="form-control" id="exampleFormControlInput1" value="{{$Homepage->meta_tag}}">
                 </div>
 
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Meta tag description</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" name="metadescription" rows="3">{{$products->meta_desc}} </textarea>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" name="metadescription" rows="3">{{$Homepage->meta_desc}}</textarea>
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Meta tag keywords</label>
-                            <textarea class="form-control" name="metakeywords" id="exampleFormControlTextarea1" rows="3">{{$products->meta_tag_key}} </textarea>
+                            <textarea class="form-control" name="metakeywords" id="exampleFormControlTextarea1" rows="3">{{$Homepage->meta_keywords}} </textarea>
                         </div>
                     </div>
                 </div> <!-- Closing the .row div here -->
 
                 <div class="form-group">
                     <label for="exampleFormControlInput1">SEO url</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1" name="seourl" placeholder="" value="{{$products->seo_url}}">
+                    <input type="text" class="form-control" id="exampleFormControlInput1" name="seourl" value="{{$Homepage->seo_url}}" >
                 </div>
 
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Dynamic Script for Head tag</label>
-                    <textarea class="form-control" name="scripthead" id="exampleFormControlTextarea1" rows="3">{{$products->dynamic_head}}</textarea>
+                    <textarea class="form-control" name="scripthead" id="exampleFormControlTextarea1" rows="3">{{$Homepage->head_tag}}</textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Dynamic Script for Body tag</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" name="scriptBody" rows="3">{{$products->dynamic_body}}</textarea>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" name="scriptBody" rows="3">{{$Homepage->body_tag}}</textarea>
                 </div>
             </div>
         </div>
 
         <div class="form-group">
             <label for="exampleFormControlInput1">Footer Description</label>
-            <textarea class="form-control editor1" name="footerdescription" rows="3">{{$products->footer_desc}} </textarea>
+            <textarea class="form-control editor1" name="footerdescription" rows="3"> {{$Homepage->footer_desc}} </textarea>
         </div>
 
-        <button type="submit" class="btn btn-primary">Save </button>
+        <button type="submit" class="btn btn-primary">Save & next</button>
     </form>
 </div>
 
-   
 
+
+<!-- modals below -->
+   
 <!-- Modal -->
  
 <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -314,9 +326,9 @@
         </button>
       </div>
       <div class="modal-body">
-      <form method="post" action="{{route('faq.save')}}">
+      <form method="post" action="{{route('faq.save')}}" enctype="multipart/form-data">
         @csrf
-        <input type="hidden" name="product_id" value="{{$products->id}}">
+        <input type="hidden" name="page_id" value="{{$Homepage->id}}">
             <div class="form-group">
                 <label for="exampleInputEmail1"> Question Title</label>
                 <input type="text" class="form-control" id="exampleInputEmail1" name="faqtitle" required> 
@@ -339,7 +351,6 @@
 
 <!-- addPageContent -->
 
-
 <div class="modal fade" id="addPageContent" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="addPageContentLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
@@ -352,7 +363,7 @@
       <div class="modal-body">
       <form method="post" action="{{ route('pagecontent.save') }}" enctype="multipart/form-data">
         @csrf
-        <input type="hidden" name="product_id" value="{{$products->id}}">
+        <input type="hidden" name="page_id" value="{{$Homepage->id}}">
             
             <div class="row">
                 <div class="col-md-6">
@@ -407,7 +418,7 @@
       <div class="modal-body">
       <form method="post" action="{{ route('keywords.save') }}" enctype="multipart/form-data">
         @csrf
-        <input type="hidden" name="product_id" value="{{$products->id}}">
+        <input type="hidden" name="page_id" value="{{$Homepage->id}}">
             
             <div class="row">
                 <div class="col-md-6">
@@ -451,14 +462,14 @@
       <div class="modal-body">
       <form method="post" action="{{ route('customadd.save') }}" enctype="multipart/form-data">
         @csrf
-        <input type="hidden" name="product_id" value="{{$products->id}}">
+        <input type="hidden" name="page_id" value="{{$Homepage->id}}">
             
             <div class="row">
 
-            <div class="col-md-6">
+            <div class="col-md-12">
                     <div class="form-group">
                         <label for="exampleInputEmail1"> Adds image</label>
-                        <input type="file" class="form-control" name="pageImage" >
+                        <input type="file" class="form-control" name="pageImage" required>
                     </div>
                 </div>
 
@@ -504,7 +515,7 @@
       <div class="modal-body">
       <form method="post" action="{{ route('pagecontent.edit') }}" enctype="multipart/form-data">
         @csrf
-        <input type="hidden" name="product_id" value="{{$products->id}}">
+        <input type="hidden" name="page_id" value="{{$Homepage->id}}">
         <input type="hidden" name="pagecontent_id" value="">
             
             <div class="row">
@@ -546,6 +557,9 @@
   </div>
 </div>
 
+
+
+<!--faq edit modal -->
 
 
 <!--faq edit modal -->
@@ -687,6 +701,7 @@
    CKEDITOR.replaceAll('editor1'); 
 </script>
 
+
 <script>
     
     function getsubcategroy(id){
@@ -699,7 +714,7 @@
                 lastName: 'Flintstone'
             }
         }).then(function (response) {
-            console.log(response.data.data);
+            // console.log(response.data.data);
 
             var html=''
                html = '<option value=""> None </option>'
@@ -709,9 +724,9 @@
 
                document.getElementById('subcategory').innerHTML = html;
               
-        });       
+        });            
     }
-    
+
     function getsubsubcategroy(id){
         let catid = document.getElementById("subcategory").value;
         console.log(catid);
@@ -736,19 +751,22 @@
               
         });
     }
-    
+
     function editpageContent(id){
         // alert(id);
             CKEDITOR.instances['editPageContentdesc'];
+
+
         axios({
             method: 'get',
             url: "{{ env('APP_URL') }}/get-faq/"+id,
             data: {
                 id: id
+                
             }
         }).then(function (response) {
             console.log(response.data.data);
-
+            
             CKEDITOR.instances['editPageContentdesc'].setData(response.data.data.description);
             $('#editPageContent input[name=videoLink]').val(response.data.data.url);
             $('#editPageContent input[name=titlename]').val(response.data.data.product_title);
@@ -756,6 +774,8 @@
             // 
             $('#editPageContent').modal('show');
 
+            
+              
         });
     }
         
@@ -821,6 +841,4 @@
     
 
 </script>
-
-
 @endsection
