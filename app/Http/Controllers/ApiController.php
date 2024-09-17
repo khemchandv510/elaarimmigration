@@ -15,6 +15,7 @@ use App\Models\Page;
 use App\Models\Blog;
 use App\Models\HomepageCard;
 use App\Models\News;
+use App\Models\Banner;
 
 class ApiController extends Controller
 {
@@ -159,6 +160,7 @@ class ApiController extends Controller
         $product->PageContent = PageContent::where('page_id', $id)->get();
         $product->Keyword =Keyword::where('page_id', $id)->get();
         $product->customAdds =CustomAdd::where('page_id', $id)->get();
+        $product->Banners =Banner::where('page_id', $id)->get();
 
         return response()->json(['status' => true, 'message' => 'product details','data' => $product]);
 
@@ -170,6 +172,12 @@ class ApiController extends Controller
 
     }
 
+    public function  HomePageCardDetails($id){
+        $homepageCard = HomepageCard::find($id);
+        return response()->json(['status' => true, 'message' => 'Home page card','data' => $homepageCard]);
+
+    }
+    
    
     
 }

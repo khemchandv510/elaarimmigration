@@ -199,7 +199,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/pages/create', [HomeCardController::class , 'CreatePageDynamic' ]);
     Route::get('/pages/{id}', [HomeCardController::class , 'PageEdit' ])->name('home.edit');
 
+    
+    Route::post('/banners/add', [HomeCardController::class , 'AddBanner' ])->name('Banners.add');
+    Route::get('/get-banner-details/{id}', [HomeCardController::class , 'BannerDetails' ]);
 
+    Route::post('/banners/update', [HomeCardController::class , 'BannerUpdate' ])->name('Banners.update');
+
+    
 
     
 });

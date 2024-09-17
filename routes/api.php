@@ -37,6 +37,8 @@ Route::get('news/{id}', [ApiController::class, 'NewsDetails']);
 
 Route::get('home-page-card', [ApiController::class, 'HomePageCard']);
 
+Route::get('home-page-card/{id}', [ApiController::class, 'HomePageCardDetails']);
+
 Route::get('pages', [ApiController::class, 'allPages']);
 Route::get('pages/{id}', [ApiController::class, 'pageDetails']);
 

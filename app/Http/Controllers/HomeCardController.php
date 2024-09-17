@@ -14,6 +14,9 @@ use App\Models\PageContent;
 use App\Models\Keyword;
 use App\Models\CustomAdd;
 use App\Models\Page;
+use App\Models\Banner;
+use PhpParser\Builder\Function_;
+use PhpParser\Node\Expr\FuncCall;
 
 use function PHPUnit\Framework\returnSelf;
 
@@ -109,9 +112,10 @@ class HomeCardController extends Controller
         $keyword = Keyword::where('page_id', $Homepage->id)->get();
 
         $CustomAdd = CustomAdd::where('page_id', $Homepage->id)->get();
+        $banners = Banner::where('page_id', $Homepage->id)->get();
 
         // dd($page);
-        return view('home-page', compact('Homepage', 'faqs', 'pageContent', 'keyword', 'CustomAdd'));
+        return view('home-page', compact('Homepage', 'faqs', 'pageContent', 'keyword', 'CustomAdd', 'banners'));
 
     }
 
@@ -223,6 +227,86 @@ class HomeCardController extends Controller
 
         // dd($page);
         return view('home-page', compact('Homepage', 'faqs', 'pageContent', 'keyword', 'CustomAdd'));
+    }
+
+    public function  AddBanner(Request $request) {
+
+        $validator = $request->validate([           
+            'page_id' => 'required|numeric',
+            'destopImage' => 'image|mimes:jpeg,png,jpg,webp|max:1024',
+            'mobileIMage' => 'image|mimes:jpeg,png,jpg,webp|max:1024',
+
+        ]);
+
+        $destopImage  = null;
+        if($request->hasFile('destopImage')){
+            $destopImage = time().'.'.$request->destopImage->getClientOriginalExtension();
+            $request->destopImage->move(public_path('images'), $destopImage);
+
+        }
+
+        $mobileImage  = null;
+        if($request->hasFile('mobileIMage')){
+            $mobileImage = time().'.'.$request->mobileIMage->getClientOriginalExtension();
+            $request->mobileIMage->move(public_path('images'), $mobileImage);
+        }
+
+        Banner::create([
+            'page_id' => $request->page_id,
+            'title' => $request->title,
+            'url' => $request->bannerUrl,
+            'Description' => $request->description,
+           
+            'destop' => $destopImage,
+            'mobile' => $mobileImage
+
+        ]);
+
+        return back();
+    }
+
+    public function BannerDetails($id){
+        
+        $banner = Banner::find($id);
+        return response()->json(['status' => true, 'data' => $banner]); 
+
+    }
+
+    public Function BannerUpdate(Request  $request){
+        $validator = $request->validate([           
+            'banner_id' => 'required|numeric',
+            'destopImage' => 'image|mimes:jpeg,png,jpg,webp|max:1024',
+            'mobileIMage' => 'image|mimes:jpeg,png,jpg,webp|max:1024',
+
+        ]);
+
+        $banner = Banner::find($request->banner_id);
+
+        $destopImage  = $banner->destop;
+        if($request->hasFile('destopImage')){
+            $destopImage = time().'.'.$request->destopImage->getClientOriginalExtension();
+            $request->destopImage->move(public_path('images'), $destopImage);
+
+        }
+
+        $mobileImage  = $banner->mobile;
+        if($request->hasFile('mobileIMage')){
+            $mobileImage = time().'.'.$request->mobileIMage->getClientOriginalExtension();
+            $request->mobileIMage->move(public_path('images'), $mobileImage);
+        }
+
+        Banner::where('id', $request->banner_id)->update([
+            // 'page_id' => $request->page_id,
+            'title' => $request->title,
+            'url' => $request->bannerUrl,
+            'Description' => $request->description,
+           
+            'destop' => $destopImage,
+            'mobile' => $mobileImage
+
+        ]);
+
+        return back();
     }
 }
 

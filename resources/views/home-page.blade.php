@@ -19,6 +19,7 @@
                 <input type="text" class="form-control" id="exampleFormControlInput1" value="{{$Homepage->page_name}}" required name="pageName" placeholder="name">
             </div>
 
+            {{--
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -62,12 +63,60 @@
                     </div>
                 </div>
 
+                --}}
 
             </div>
         </div>
         
        
-         <!-- page content -->
+         <!-- Banners content -->
+         <div class="card bg-light mb-3">
+            <div class="card-header">Banners</div>
+            <div class="card-body">
+
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddBannerssection"> Add Banner Content </button>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Destop Image</th>
+                    <th scope="col">Mobile Image</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
+                    $count = 0
+                    @endphp
+                    @foreach($banners as $page)
+                    
+                    <tr>
+                    <th scope="row">{{$page->id}}</th>
+                    
+                    <td> <img src="{{ asset('/public/images') }}/{{$page->destop}}" width="100px"> </td>
+                    <td> <img src="{{ asset('/public/images') }}/{{$page->mobile}}" width="100px"> </td>
+                    <td> {{$page->title}} </td>
+                           
+                    <td> 
+                     <button type="button" class="btn btn-primary" onclick="editBannerContent({{$page->id }})" > <i class="fa fa-edit" aria-hidden="true"></i> </button>
+                    
+                    
+                    <!-- <a href=""><i class="fa fa-trash" aria-hidden="true"></i> </a> -->
+                    
+                    </td>
+                    </tr>
+                @endforeach
+                </tbody>
+                </table>
+
+              
+            </div>
+        </div>
+        
+        
+        <!-- page content -->
          <div class="card bg-light mb-3">
             <div class="card-header">Page content</div>
             <div class="card-body">
@@ -697,6 +746,134 @@
 </div>
 
 
+<!-- banners add modal -->
+
+<div class="modal fade" id="AddBannerssection" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="addPageContentLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addPageContentLabel"> Add Banners    </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form method="post" action="{{ route('Banners.add') }}" enctype="multipart/form-data">
+        @csrf
+        <input type="hidden" name="page_id" value="{{$Homepage->id}}">
+            
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1"> Destop  image</label>
+                        <input type="file" class="form-control" name="destopImage" >
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1"> Mobile Image</label>
+                        <input type="file" class="form-control" name="mobileIMage" >
+                    </div>
+                </div>
+               
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1"> Title </label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" name="title" required >
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1"> Banner Url </label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" name="bannerUrl" >
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1"> Description </label>
+                        <textarea type="text" class="form-control" id="exampleInputEmail1" name="description" > </textarea>
+                    </div>
+                </div>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- edit banner details -->
+<div class="modal fade" id="EditBannerCont" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="addPageContentLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addPageContentLabel"> Add Banners    </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form method="post" action="{{ route('Banners.update') }}" enctype="multipart/form-data">
+        @csrf
+        <input type="hidden" name="banner_id" value="">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1"> Destop  image</label>
+                        <input type="file" class="form-control" name="destopImage" >
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1"> Mobile Image</label>
+                        <input type="file" class="form-control" name="mobileIMage" >
+                    </div>
+                </div>
+               
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1"> Title </label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" name="title" required >
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1"> Banner Url </label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" name="bannerUrl" >
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1"> Description </label>
+                        <textarea type="text" class="form-control" id="exampleInputEmail1" name="description" > </textarea>
+                    </div>
+                </div>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
    CKEDITOR.replaceAll('editor1'); 
 </script>
@@ -837,6 +1014,27 @@
             $('#EdircustomAdds').modal('show');
 
         });
+    }
+
+    function editBannerContent(id){
+
+        axios({
+            method: 'get',
+            url: "{{ env('APP_URL') }}/get-banner-details/"+id,
+            data: {
+                id: id
+            }
+        }).then(function (response) {
+
+            $('#EditBannerCont input[name=title]').val(response.data.data.title);
+            $('#EditBannerCont input[name=bannerUrl]').val(response.data.data.url);
+            $('#EditBannerCont textarea[name=description]').val(response.data.data.Description);
+            $('#EditBannerCont input[name=banner_id]').val(id);
+
+            $('#EditBannerCont').modal('show');
+
+        });
+
     }
     
 
