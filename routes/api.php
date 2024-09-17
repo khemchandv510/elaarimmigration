@@ -32,6 +32,10 @@ Route::get('sub-sub-category/{id}', [ApiController::class, 'subSubCategories']);
 Route::get('blogs', [ApiController::class, 'allBlogs']);
 Route::get('news', [ApiController::class, 'allNews']);
 
+Route::get('home-page-card', [ApiController::class, 'HomePageCard']);
+
+Route::get('pages', [ApiController::class, 'allPages']);
+Route::get('pages/{id}', [ApiController::class, 'pageDetails']);
 
 
 

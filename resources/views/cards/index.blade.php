@@ -6,7 +6,7 @@
 <div class="row">
 <a href="{{route('card.add')}}"> <button type="button" class="btn btn-primary w-10"  >  Add new Card </button></a>
     <div class="col-md-8">
-        <table class="table table-striped">
+        <table class="table table-striped" id="newdatatable">
             <thead>
                 <tr>
                 <th scope="col">id</th>
@@ -44,5 +44,7 @@
 </div>
 </section>
 
-
+<script>
+new DataTable('#newdatatable');
+</script>
 @endsection

@@ -13,6 +13,7 @@ use App\Models\PageContent;
 use App\Models\Keyword;
 use App\Models\Page;
 use App\Models\Blog;
+use App\Models\HomepageCard;
 use App\Models\News;
 
 class ApiController extends Controller
@@ -132,8 +133,14 @@ class ApiController extends Controller
 
         return response()->json(['status' => true, 'message' => 'product details','data' => $product]);
 
+    }
 
+    public function  HomePageCard(){
+        $homepageCard = HomepageCard::all();
+        return response()->json(['status' => true, 'message' => 'Home page card','data' => $homepageCard]);
 
     }
+
+   
     
 }
