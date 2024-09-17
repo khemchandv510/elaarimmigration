@@ -5,7 +5,7 @@
 <section class="content">
 <div class="row">
         <div class="col-md-8">
-            <table class="table table-striped">
+            <table class="table table-striped" id="newdatatable">
                 <thead>
                     <tr>
                     <th scope="col">id</th>
@@ -16,16 +16,21 @@
 
                     <th scope="col">Image</th>
                     <th scope="col">Navi</th>
-                    <th scope="col">Action</th>
+                    <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                
+
+                    @php
+                        $count = 0;
+                    @endphp
+                    
                 @if($subSubCategories)
                     @foreach($subSubCategories as $category)
+                    @php $count++; @endphp
                         <tr>
-                            <th scope="row">{{$category->id }}</th>
-                            <td>{{$category->name }}</td>
+                        <th scope="row">{{$count }}</th>
+                        <td>{{$category->name }}</td>
                             <td>{{@$category->mainCategory->name }}</td>
                             <td>{{@$category->subCategory->name }}</td>
                             <td> @if($category->image)
@@ -173,5 +178,9 @@
             });        
     }
 
+</script>
+
+<script>
+new DataTable('#newdatatable');
 </script>
 @endsection

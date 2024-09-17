@@ -23,7 +23,7 @@ class CategoryController extends Controller
                 'name'      => 'required|unique:categories|string',
                 'navi'      => 'required|numeric',
                 // 'parent_id' => 'nullable|numeric',
-                'image' => 'image|mimes:jpeg,png|max:1024',
+                'image' => 'image|mimes:jpeg,png,jpg,webp|max:1024',
             ]);
 
 
@@ -63,7 +63,7 @@ class CategoryController extends Controller
         $validator = $request->validate([
             'name'      => 'required|string',
             'navi'      => 'required|numeric',
-            'image' => 'image|mimes:jpeg,png|max:1024',
+            'image' => 'image|mimes:jpeg,png,jpg,webp|max:1024',
         ]);
 
         $catIdCheck = Category::where('id', $catId)->first();
@@ -100,7 +100,7 @@ class CategoryController extends Controller
             'name'      => 'required|unique:sub_categories|string',
             'navi'      => 'required|numeric',
             'parent_id' => 'required|nullable|numeric',
-            'image' => 'image|mimes:jpeg,png|max:1024',
+            'image' => 'image|mimes:jpeg,png,jpg,webp|max:1024',
         ]);
 
 
@@ -139,7 +139,7 @@ class CategoryController extends Controller
             'navi'      => 'required|numeric',
             'parent_id' => 'required|nullable|numeric',
             'subcategory' => 'required|nullable|numeric',
-            'image' => 'image|mimes:jpeg,png|max:1024',
+            'image' => 'image|mimes:jpeg,png,jpg,webp|max:1024',
         ]);
 
 

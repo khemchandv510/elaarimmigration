@@ -365,13 +365,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="exampleInputEmail1"> Video Link</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" name="videoLink" required>
+                        <input type="text" class="form-control" id="exampleInputEmail1" name="videoLink" >
                     </div>
                 </div>
                  <div class="col-md-12">
                     <div class="form-group">
                         <label for="exampleInputEmail1"> Title</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" name="titlename" required>
+                        <input type="text" class="form-control" id="exampleInputEmail1" name="titlename" >
                     </div>
                 </div>
 
@@ -518,14 +518,14 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="exampleInputEmail1"> Video Link</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" name="videoLink" required>
+                        <input type="text" class="form-control" id="exampleInputEmail1" name="videoLink" >
                     </div>
                 </div>
                 
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="exampleInputEmail1"> Title</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" name="titlename" required>
+                        <input type="text" class="form-control" id="exampleInputEmail1" name="titlename" >
                     </div>
                 </div>
 

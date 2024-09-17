@@ -56,7 +56,7 @@ class ProductController extends Controller
             'pageName'      => 'required|string',
             'category'      => 'required|numeric',
             // 'subcategory' => 'required|numeric',
-            'image' => 'image|mimes:jpeg,png|max:1024',
+            'image' => 'image|mimes:jpeg,png,jpg,webp|max:1024',
         ]);
 
         $products = Product::create([
@@ -86,7 +86,7 @@ class ProductController extends Controller
             'pageName'      => 'required|string',
             'category'      => 'required|numeric',
             // 'subcategory' => 'required|numeric',
-            'image' => 'image|mimes:jpeg,png|max:1024',
+            'image' => 'image|mimes:jpeg,png,jpg,webp|max:1024',
         ]);
         // dd($id);
 

@@ -52,7 +52,7 @@ class BlogController extends Controller
             'pageName'      => 'required',
             'category'      => 'required|numeric',
             'blog_id' => 'required|numeric',
-            'image' => 'image|mimes:jpeg,jpg,png|max:1024',
+            'image' => 'image|mimes:jpeg,png,jpg,webp|max:1024',
         ]);
 
 
@@ -69,7 +69,7 @@ class BlogController extends Controller
             }
             
             
-        Blog::where(['id' => $id ])->update(['title' => $request->pageName, 'category_id' => $request->category, 'sub_category_id' => $request->subcategory, 'sub_sub_category' => $request->subSubcategory, 'auther_name' => $request->authorName, 'slug' => $request->slug, 'content' => $request->footerdescription, 'image' => $imageName ]);
+        Blog::where(['id' => $id ])->update(['title' => $request->pageName, 'category_id' => $request->category, 'sub_category_id' => $request->subcategory, 'sub_sub_category' => $request->subSubcategory, 'auther_name' => $request->authorName, 'slug' => $request->slug, 'content' => $request->footerdescription, 'image' => $imageName, 'metatag' => $request->metatag, 'metadescription' => $request->metadescription, 'metakeywords' => $request->metakeywords, 'seourl' => $request->seourl, 'scripthead' => $request->scripthead, 'scriptBody' => $request->scriptBody ]);
         
         
         return back();
@@ -85,9 +85,10 @@ class BlogController extends Controller
             'pageName'      => 'required',
             'category'      => 'required|numeric',
             // 'subcategory' => 'required|numeric',
-            'image' => 'image|mimes:jpeg,jpg,png|max:1024',
+            'image' => 'image|mimes:jpeg,png,jpg,webp|max:1024',
         ]);
 
+        dd($request);
 
             $imageName  = null;
             if($request->file('image')){
@@ -97,7 +98,7 @@ class BlogController extends Controller
 
             }
             
-        Blog::create(['title' => $request->pageName, 'category_id' => $request->category, 'sub_category_id' => $request->subcategory, 'sub_sub_category' => $request->subSubcategory, 'auther_name' => $request->authorName, 'slug' => $request->slug, 'content' => $request->footerdescription, 'image' => $imageName ]);
+        Blog::create(['title' => $request->pageName, 'category_id' => $request->category, 'sub_category_id' => $request->subcategory, 'sub_sub_category' => $request->subSubcategory, 'auther_name' => $request->authorName, 'slug' => $request->slug, 'content' => $request->footerdescription, 'image' => $imageName, 'metatag' => $request->metatag, 'metadescription' => $request->metadescription, 'metakeywords' => $request->metakeywords, 'seourl' => $request->seourl, 'scripthead' => $request->scripthead, 'scriptBody' => $request->scriptBody ]);
         
         
         return redirect()->route('blog.index');
@@ -125,7 +126,7 @@ class BlogController extends Controller
             'pageName'      => 'required',
             'category'      => 'required|numeric',
             // 'subcategory' => 'required|numeric',
-            'image' => 'image|mimes:jpeg,jpg,png|max:1024',
+            'image' => 'image|mimes:jpeg,png,jpg,webp|max:1024',
         ]);
 
 
@@ -137,7 +138,7 @@ class BlogController extends Controller
 
             }
             
-        News::create(['title' => $request->pageName, 'category_id' => $request->category, 'sub_category_id' => $request->subcategory, 'sub_sub_category' => $request->subSubcategory, 'auther_name' => $request->authorName, 'slug' => $request->slug, 'content' => $request->footerdescription, 'image' => $imageName ]);
+        News::create(['title' => $request->pageName, 'category_id' => $request->category, 'sub_category_id' => $request->subcategory, 'sub_sub_category' => $request->subSubcategory, 'auther_name' => $request->authorName, 'slug' => $request->slug, 'content' => $request->footerdescription, 'image' => $imageName, 'metatag' => $request->metatag, 'metadescription' => $request->metadescription, 'metakeywords' => $request->metakeywords, 'seourl' => $request->seourl, 'scripthead' => $request->scripthead, 'scriptBody' => $request->scriptBody ]);
         
         
         return redirect()->route('news.index');
@@ -164,7 +165,7 @@ class BlogController extends Controller
             'pageName'      => 'required',
             'category'      => 'required|numeric',
             'blog_id' => 'required|numeric',
-            'image' => 'image|mimes:jpeg,jpg,png|max:1024',
+            'image' => 'image|mimes:jpeg,png,jpg,webp|max:1024',
         ]);
 
 
@@ -181,7 +182,7 @@ class BlogController extends Controller
             }
             
             
-        News::where(['id' => $id ])->update(['title' => $request->pageName, 'category_id' => $request->category, 'sub_category_id' => $request->subcategory, 'sub_sub_category' => $request->subSubcategory, 'auther_name' => $request->authorName, 'slug' => $request->slug, 'content' => $request->footerdescription, 'image' => $imageName ]);
+        News::where(['id' => $id ])->update(['title' => $request->pageName, 'category_id' => $request->category, 'sub_category_id' => $request->subcategory, 'sub_sub_category' => $request->subSubcategory, 'auther_name' => $request->authorName, 'slug' => $request->slug, 'content' => $request->footerdescription, 'image' => $imageName , 'metatag' => $request->metatag, 'metadescription' => $request->metadescription, 'metakeywords' => $request->metakeywords, 'seourl' => $request->seourl, 'scripthead' => $request->scripthead, 'scriptBody' => $request->scriptBody ]);
         
         
         return back();

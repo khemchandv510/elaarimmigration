@@ -83,6 +83,48 @@
             </div>
 
 
+                   <!-- seo information -->
+        <div class="card bg-light mb-3">
+            <div class="card-header">Seo</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Meta Tag</label>
+                    <input type="text" name="metatag" class="form-control" id="exampleFormControlInput1" value="{{$blog->metatag}}" placeholder="name">
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Meta tag description</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" name="metadescription" rows="3">{{$blog->metadescription}} </textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Meta tag keywords</label>
+                            <textarea class="form-control" name="metakeywords" id="exampleFormControlTextarea1" rows="3">{{$blog->metakeywords}} </textarea>
+                        </div>
+                    </div>
+                </div> <!-- Closing the .row div here -->
+
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">SEO url</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" name="seourl" placeholder="" value="{{$blog->seourl}}">
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Dynamic Script for Head tag</label>
+                    <textarea class="form-control" name="scripthead" id="exampleFormControlTextarea1" rows="3">{{$blog->scripthead}}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Dynamic Script for Body tag</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" name="scriptBody" rows="3">{{$blog->scriptBody}}</textarea>
+                </div>
+            </div>
+        </div>
+
             </div>
         </div>
         

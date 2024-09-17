@@ -29,8 +29,8 @@ class FaqController extends Controller
 
     public function  savePageContent(Request $request) {
         $validator = $request->validate([
-            'pageImage'      => 'image|mimes:jpeg,png|max:1024',
-            'videoLink'      => 'required',
+            'pageImage'      => 'image|mimes:jpeg,png,jpg,webp|max:1024',
+            // 'videoLink'      => 'required',
             // 'product_id'      => 'required|numeric',
         ]);
 
@@ -85,7 +85,7 @@ class FaqController extends Controller
             // 'product_id'      => 'required|numeric',
             'addsName'      => 'required',
             'addUrl' => 'required',
-            // 'pageImage'      => 'image|mimes:jpeg,png|max:1024',
+            // 'pageImage'      => 'image|mimes:jpeg,png,jpg,webp|max:1024',
 
         ]);
 
@@ -143,8 +143,8 @@ class FaqController extends Controller
     
     public function  editPageContent(Request $request) {
         $validator = $request->validate([
-            'pageImage'      => 'image|mimes:jpeg,png|max:1024',
-            'videoLink'      => 'required',
+            'pageImage'      => 'image|mimes:jpeg,png,jpg,webp|max:1024',
+            // 'videoLink'      => 'required',
             'product_id'      => 'required|numeric',
             'pagecontent_id' =>  'required|numeric'
         ]);

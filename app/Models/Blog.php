@@ -27,7 +27,8 @@ class Blog extends Model
         'content',
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
+        'metatag', 'metadescription' ,  'metakeywords', 'seourl' , 'scripthead'  , 'scriptBody'
     ];
 
      public function mainCategory()

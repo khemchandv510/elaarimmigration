@@ -5,7 +5,7 @@
 <section class="content">
     <div class="row">
         <div class="col-md-8">
-            <table class="table table-striped">
+            <table class="table table-striped" id="newdatatable">
                 <thead>
                     <tr>
                     <th scope="col">id</th>
@@ -18,11 +18,17 @@
                 <tbody>
                 
                 
+                @php
+                        $count = 0;
+                    @endphp
+
                 @if($categories)
                     @foreach($categories as $category)
+                    @php $count++; @endphp
+
                         <tr>
-                            <th scope="row">{{$category->id }}</th>
-                            <td>{{$category->name }}</td>
+                        <th scope="row">{{$count }}</th>
+                        <td>{{$category->name }}</td>
                             <td> @if($category->image)
                                 <img src="{{ asset('/public/images') }}/{{$category->image}}" width="100px">
                                 @endif
@@ -132,4 +138,8 @@
         </div>
     </div>
 </section>
+
+<script>
+new DataTable('#newdatatable');
+</script>
 @endsection
