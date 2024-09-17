@@ -191,7 +191,14 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::get('/home-page', [HomeCardController::class , 'homePage' ])->name('card.homepage');
-    Route::post('/home-page', [HomeCardController::class , 'updateHomePage' ]);
+    Route::post('/home-page', [HomeCardController::class , 'updateHomePage' ])->name('home.update');
+
+    Route::get('/pages', [HomeCardController::class , 'pages' ])->name('home.pages');
+
+    Route::get('/pages/create', [HomeCardController::class , 'CreatePage' ])->name('home.create');
+    Route::post('/pages/create', [HomeCardController::class , 'CreatePageDynamic' ]);
+    Route::get('/pages/{id}', [HomeCardController::class , 'PageEdit' ])->name('home.edit');
+
 
 
     

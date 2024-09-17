@@ -46,6 +46,7 @@ class BlogController extends Controller
     
     public function updateBlog(Request $request, $id){
         
+        // dd($request);
         
         $validator = $request->validate([
             'pageName'      => 'required',

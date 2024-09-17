@@ -39,8 +39,8 @@
                             </div>
                             @if (Route::has('password.request'))
                                 <div class="col-6 text-end">
-                                    <a href="{{ route('password.request') }}" class="btn btn-link px-0"
-                                       type="button">{{ __('Forgot Your Password?') }}</a>
+                                    <!-- <a href="{{ route('password.request') }}" class="btn btn-link px-0"
+                                       type="button">{{ __('Forgot Your Password?') }}</a> -->
                                 </div>
                             @endif
                         </div>
@@ -50,9 +50,9 @@
             <div class="card col-md-5 text-white bg-primary py-5">
                 <div class="card-body text-center">
                     <div>
-                        <h2>{{ __('Sign up') }}</h2>
-                        <a href="{{ route('register') }}"
-                           class="btn btn-lg btn-outline-light mt-3">{{ __('Register') }}</a>
+                        <h1>{{ __('Elaarimmigration Login') }}</h1>
+                        <!-- <a href="{{ route('register') }}"
+                           class="btn btn-lg btn-outline-light mt-3">{{ __('Register') }}</a> -->
                     </div>
                 </div>
             </div>

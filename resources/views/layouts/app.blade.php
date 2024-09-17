@@ -75,7 +75,7 @@
         </div>
     </header>
     <div class="body flex-grow-1 px-3">
-        <div class="container-lg">
+        <div class="container-fluid">
             @yield('content')
         </div>
     </div>

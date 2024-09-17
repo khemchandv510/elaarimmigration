@@ -15,6 +15,8 @@ use App\Models\Keyword;
 use App\Models\CustomAdd;
 use App\Models\Page;
 
+use function PHPUnit\Framework\returnSelf;
+
 class HomeCardController extends Controller
 {
     
@@ -159,6 +161,68 @@ class HomeCardController extends Controller
 
         return back();
 
+    }
+
+    public function pages(){
+        $home = Page::all();
+        return view('home.index', compact('home'));
+    }
+
+    public function CreatePage (){
+        return view('home.create');
+    }
+
+    public function CreatePageDynamic(Request $request){
+
+        $destopImage  = null;
+        if($request->hasFile('destopImage')){
+            $destopImage = time().'.'.$request->destopImage->getClientOriginalExtension();
+            $request->destopImage->move(public_path('images'), $destopImage);
+
+        }
+        $mobileImage  = null;
+        if($request->hasFile('mobileIMage')){
+            $mobileImage = time().'.'.$request->mobileIMage->getClientOriginalExtension();
+            $request->mobileIMage->move(public_path('images'), $mobileImage);
+
+        }
+
+       $page = Page::create([
+            'page_name' => $request->pageName,
+            'banner_title' => $request->bannerTitle,
+            'banner_url' => $request->bannerUrl,
+            'description' => $request->description,
+            'faq_title' => $request->faqtitle,
+            'keyword_title' => $request->customKeyword,
+            'meta_tag' => $request->metatag,
+            'meta_desc' => $request->metadescription,
+            'meta_keywords' => $request->metakeywords,
+            'seo_url' => $request->seourl,
+
+            'head_tag' => $request->scripthead,
+            'body_tag' => $request->scriptBody,
+            'footer_desc' => $request->footerdescription,
+            'banner1' => $destopImage,
+            'banner2' => $mobileImage
+
+        ]);
+        
+        return redirect()->route(['home.edit', $page->id ]);
+        
+        
+    }
+
+    public function PageEdit($id){
+        $Homepage = Page::where('id', $id)->first();
+        // dd($page);
+        $faqs = Faq::where('page_id', $Homepage->id)->get();
+        $pageContent = PageContent::where('page_id', $Homepage->id)->get();
+        $keyword = Keyword::where('page_id', $Homepage->id)->get();
+
+        $CustomAdd = CustomAdd::where('page_id', $Homepage->id)->get();
+
+        // dd($page);
+        return view('home-page', compact('Homepage', 'faqs', 'pageContent', 'keyword', 'CustomAdd'));
     }
 }
 

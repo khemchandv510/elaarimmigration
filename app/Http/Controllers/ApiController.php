@@ -11,7 +11,7 @@ use App\Models\Product;
 use App\Models\Faq;
 use App\Models\PageContent;
 use App\Models\Keyword;
-
+use App\Models\Page;
 use App\Models\Blog;
 use App\Models\News;
 
@@ -115,5 +115,25 @@ class ApiController extends Controller
         return response()->json(['status' => true, 'message' => 'all news','data' => $product], 200);
     }
     
+    
+    public function allPages(){
+        $Page = Page::all();
+        return response()->json(['status' => true, 'message' => 'all pages','data' => $Page], 200);
+
+    }
+
+    public function pageDetails($id){
+
+        $product = Page::find($id);
+        $product->faqs = Faq::where('page_id', $id)->get();
+        $product->PageContent = PageContent::where('page_id', $id)->get();
+        $product->Keyword =Keyword::where('page_id', $id)->get();
+        $product->customAdds =CustomAdd::where('page_id', $id)->get();
+
+        return response()->json(['status' => true, 'message' => 'product details','data' => $product]);
+
+
+
+    }
     
 }

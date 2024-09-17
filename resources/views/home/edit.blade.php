@@ -8,7 +8,7 @@
 
 
 <div class="card mb-4 col-md-12"> 
-    <form action="" enctype="multipart/form-data" method="POST" test>
+    <form action="{{route('blog.store')}}" enctype="multipart/form-data" method="POST" test>
         @csrf
         <div class="card-header">Information</div>
             <input type="hidden" name="blog_id" value="{{$blog->id}}" > 

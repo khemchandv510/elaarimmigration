@@ -99,6 +99,14 @@
             {{ __('Home page ') }}
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('home.pages') }}">
+            <svg class="nav-icon">
+                <use xlink:href="{{ asset('icons/coreui.svg#cil-speedometer') }}"></use>
+            </svg>
+            {{ __('Pages ') }}
+        </a>
+    </li>
     
     
 

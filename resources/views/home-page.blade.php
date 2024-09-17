@@ -8,7 +8,7 @@
 
 
 <div class="card mb-4 col-md-12">
-    <form action="" enctype="multipart/form-data" method="post">
+    <form action="{{route('home.update')}}" enctype="multipart/form-data" method="post">
         @csrf
         <div class="card-header">Information</div>
         <input type="hidden" name="page_id" value="{{$Homepage->id}}">
@@ -306,7 +306,7 @@
             <textarea class="form-control editor1" name="footerdescription" rows="3"> {{$Homepage->footer_desc}} </textarea>
         </div>
 
-        <button type="submit" class="btn btn-primary">Save & next</button>
+        <button type="submit" class="btn btn-primary"> Update </button>
     </form>
 </div>
 
