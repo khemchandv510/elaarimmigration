@@ -104,6 +104,25 @@ class ApiController extends Controller
          
         return response()->json(['status' => true, 'message' => 'all blogs','data' => $product]);
     }
+
+    
+
+    public function BlogDetails($id){
+        $product = Blog::find($id);
+        if(empty($product)){
+            return response()->json(['status' => false, 'message' => 'Not found blogs','data' => null], 200);
+        }
+        //  $product->map(function ($item) {
+            $product->category_id = $product->mainCategory->name;
+            $product->sub_category = @$product->SubCategories->name;
+            $product->sub_sub_category = @$product->subSubCategories->name;
+            // return $item;
+        // });
+       
+         
+        return response()->json(['status' => true, 'message' => 'all blogs','data' => $product]);
+    }
+
     public function allNews(){
         $product = News::all();
         
@@ -113,6 +132,16 @@ class ApiController extends Controller
         });
        
          
+        return response()->json(['status' => true, 'message' => 'all news','data' => $product], 200);
+    }
+
+    
+    public function NewsDetails($id){
+        $product = News::find($id);
+        if(empty($product)){
+            return response()->json(['status' => false, 'message' => 'Not foune news','data' => null], 200);
+        }
+        $product->category_id = $product->mainCategory->name;         
         return response()->json(['status' => true, 'message' => 'all news','data' => $product], 200);
     }
     
