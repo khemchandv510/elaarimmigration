@@ -6,7 +6,7 @@
 <div class="row">
 <a href="{{route('blog.create')}}"> <button type="button" class="btn btn-primary w-10"  >  Add new Blog</button></a>
     <div class="col-md-8">
-        <table class="table table-striped">
+        <table class="table table-striped" id="newdatatable">
             <thead>
                 <tr>
                 <th scope="col">id</th>
@@ -46,6 +46,8 @@
     </div>
 </div>
 </section>
-
+<script>
+new DataTable('#newdatatable');
+</script>
 
 @endsection

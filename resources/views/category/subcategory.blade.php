@@ -5,7 +5,7 @@
 <section class="content">
 <div class="row">
         <div class="col-md-8">
-            <table class="table table-striped">
+            <table class="table table-striped" id="newdatatable">
                 <thead>
                     <tr>
                     <th scope="col">id</th>
@@ -134,5 +134,7 @@
 </section>
 <script>
    CKEDITOR.replaceAll('editor1');
+
+   new DataTable('#newdatatable');
 </script>
 @endsection
