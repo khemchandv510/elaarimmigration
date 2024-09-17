@@ -224,9 +224,11 @@ class HomeCardController extends Controller
         $keyword = Keyword::where('page_id', $Homepage->id)->get();
 
         $CustomAdd = CustomAdd::where('page_id', $Homepage->id)->get();
+        $banners = Banner::where('page_id', $Homepage->id)->get();
 
         // dd($page);
-        return view('home-page', compact('Homepage', 'faqs', 'pageContent', 'keyword', 'CustomAdd'));
+        return view('home-page', compact('Homepage', 'faqs', 'pageContent', 'keyword', 'CustomAdd', 'banners'));
+
     }
 
     public function  AddBanner(Request $request) {
