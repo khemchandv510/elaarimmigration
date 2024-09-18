@@ -274,6 +274,14 @@ class HomeCardController extends Controller
 
     }
 
+    
+    public function DeleteBanner($id){
+        
+        $banner = Banner::find($id)->delete();
+        return back();
+
+    }
+
     public Function BannerUpdate(Request  $request){
         $validator = $request->validate([           
             'banner_id' => 'required|numeric',

@@ -7,6 +7,8 @@ use App\Models\SubCategory;
 use App\Models\SubSubCategory;
 
 use Illuminate\Http\Request;
+use PhpParser\Builder\Function_;
+use PhpParser\Node\Expr\FuncCall;
 
 class CategoryController extends Controller
 {
@@ -180,6 +182,35 @@ class CategoryController extends Controller
         SubSubCategory::where('id' , $id)->delete();
         
         return redirect()->back()->with('success', 'Category has been deleted successfully.');
+    }
+
+    public Function subCategoryDetails($id){
+
+        $categories = Category::where('parent_id', null)->orderby('id', 'desc')->get();
+        $subCategories = SubCategory::find($id);
+        return view('category.Editsubcategory', compact('subCategories', 'categories'));
+
+    }
+
+    
+    public Function subCategoryUpdate(Request $request, $id){
+
+        // $categories = Category::where('parent_id', null)->orderby('id', 'desc')->get();
+        $subCategories = SubCategory::find($id);
+        $imageName = $subCategories->image;
+        if($request->hasfile('image')){
+            $imageName = time().'.'.$request->image->getClientOriginalExtension();
+            $request->image->move(public_path('images'), $imageName);
+
+        }
+        subCategory::where('id', $id)->update([
+            'name' => $request->name,
+            'category_id' => $request->parent_id,
+            'navi' => $request->navi,
+            'image' => $imageName ,
+        ]);
+        return back();        
+
     }
     
     

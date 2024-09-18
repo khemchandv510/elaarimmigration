@@ -107,10 +107,15 @@
             {{ __('Pages ') }}
         </a>
     </li>
-    
-    
 
-
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('media.show') }}">
+            <svg class="nav-icon">
+                <use xlink:href="{{ asset('icons/coreui.svg#cil-speedometer') }}"></use>
+            </svg>
+            {{ __('Media ') }}
+        </a>
+    </li>
 
     <!--<li class="nav-item">-->
     <!--    <a class="nav-link" href="{{ url('send-email') }}">-->

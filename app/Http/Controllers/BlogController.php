@@ -88,8 +88,6 @@ class BlogController extends Controller
             'image' => 'image|mimes:jpeg,png,jpg,webp|max:1024',
         ]);
 
-        // dd($request);
-
             $imageName  = null;
             if($request->file('image')){
 
