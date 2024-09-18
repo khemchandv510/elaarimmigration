@@ -204,6 +204,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/get-banner-details/{id}', [HomeCardController::class , 'BannerDetails' ]);
 
     Route::post('/banners/update', [HomeCardController::class , 'BannerUpdate' ])->name('Banners.update');
+    Route::get('/get-banner-delete/{id}', [HomeCardController::class , 'DeleteBanner' ])->name('Banners.delete');
+
 
     
 

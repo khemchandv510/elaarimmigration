@@ -168,6 +168,12 @@ class ApiController extends Controller
 
     public function  HomePageCard(){
         $homepageCard = HomepageCard::all();
+
+        $homepageCard->map(function ($item) {
+            $item->category_id = $item->mainCategory->name;
+            return $item;
+        });
+
         return response()->json(['status' => true, 'message' => 'Home page card','data' => $homepageCard]);
 
     }

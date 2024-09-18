@@ -103,7 +103,7 @@
                      <button type="button" class="btn btn-primary" onclick="editBannerContent({{$page->id }})" > <i class="fa fa-edit" aria-hidden="true"></i> </button>
                     
                     
-                    <!-- <a href=""><i class="fa fa-trash" aria-hidden="true"></i> </a> -->
+                    <a href="{{route('Banners.delete', $page->id)}}"><i class="fa fa-trash" aria-hidden="true"></i> </a>
                     
                     </td>
                     </tr>
