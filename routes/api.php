@@ -41,6 +41,8 @@ Route::get('home-page-card/{id}', [ApiController::class, 'HomePageCardDetails'])
 
 Route::get('pages', [ApiController::class, 'allPages']);
 Route::get('pages/{id}', [ApiController::class, 'pageDetails']);
+Route::get('social-media', [ApiController::class, 'Socialmedia']);
+
 
 
 

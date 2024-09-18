@@ -10,7 +10,7 @@ use App\Http\Controllers\FaqController;
 use App\Http\Controllers\BlogController;
 
 use App\Http\Controllers\HomeCardController;
-
+use App\Http\Controllers\SmtpController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,10 +72,14 @@ Route::middleware('auth')->group(function () {
 
     Route::any('category', [CategoryController::class, 'createCategory'])->name('Category.show');
     Route::get('category/{id}', [CategoryController::class, 'viewCategory'])->name('category.detail');
-
+    
     Route::post('category/{id}', [CategoryController::class, 'updateCategory'])->name('category.update');
 
     Route::get('sub-category', [CategoryController::class, 'subCategory'])->name('Category.showSubCategory');
+
+    Route::get('sub-category/{id}', [CategoryController::class, 'subCategoryDetails'])->name('Category.showSubCategoryDetails');
+    Route::post('sub-category/{id}', [CategoryController::class, 'subCategoryUpdate']);
+
     Route::post('sub-category', [CategoryController::class, 'createSubCategory'])->name('Category.showSubCategory');
     Route::get('sub-sub-category', [CategoryController::class, 'subSubCategory'])->name('Category.showSubSubCategory');
     Route::post('sub-sub-category', [CategoryController::class, 'createsubsubCategory'])->name('Category.subSubCategory');
@@ -206,8 +210,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/banners/update', [HomeCardController::class , 'BannerUpdate' ])->name('Banners.update');
     Route::get('/get-banner-delete/{id}', [HomeCardController::class , 'DeleteBanner' ])->name('Banners.delete');
 
+    Route::get('/media', [SmtpController::class , 'showMedia' ])->name('media.show');
 
-    
+    Route::post('/media', [SmtpController::class , 'SaveMedia' ]);    
 
     
 });

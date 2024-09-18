@@ -3,61 +3,30 @@
 @section('content')
 
 <section class="content">
-<div class="row">
-        <div class="col-md-8">
-            <table class="table table-striped" id="newdatatable">
-                <thead>
-                    <tr>
-                    <th scope="col">id</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Category name</th>
-                    <th scope="col">Image</th>
-                    <th scope="col">Navi</th>
-                    <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                
-                
-                @if($categories)
-                    @foreach($subCategories as $category)
-                        <tr>
-                            <th scope="row">{{$category->id }}</th>
-                            <td>{{$category->name }}</td>
-                            <td>{{@$category->mainCategory->name }}</td>
-                            <td> @if($category->image)
-                                <img src="{{ asset('/public/images') }}/{{$category->image}}" width="100px">
-                                @endif
-                            </td>
-                            <td>@if($category->navi == 0)  False @else True @endif </td>
-                            <td><a href="{{route('Category.showSubCategoryDetails', $category->id)}}"><i class="fa fa-edit" aria-hidden="true"></i></a> 
-                               <a href="{{route('sub-category.delete', $category->id)}}"> <i class="fa fa-trash" aria-hidden="true"></i>  </a>
-                            </td>
-                        </tr>
-                    @endforeach
-                @endif
-                    
-                </tbody>
-            </table>
-        </div>
+    <div class="box-header with-border">
+    </div>
+    <div class="row">
+     
         <div class="col-md-4">
             <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h4 class="box-title">Create sub Category</h4>
+            <div class="box-header with-border">
+                    <h4 class="box-title">Edit Category</h4>
                 </div>
-                
-                <form role="form" method="post" enctype="multipart/form-data">
+                <form action="" role="form" method="post" enctype="multipart/form-data">
                     {{csrf_field()}}
                     <div class="box-body">
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Category name*</label>
-                                    <input type="text" name="name" class="form-control" placeholder="Category name" value="{{old('name')}}" required />
+                                    <input type="text" name="name" class="form-control" placeholder="Category name" value="{{ $subCategories->name }}" required />
                                 </div>
                             </div>
 
                             <div class="col-sm-12">
+                            @if($subCategories->image)
+                                <img src="{{ asset('/public/images') }}/{{$subCategories->image}}" width="250px">
+                                @endif
                                 <div class="form-group">
                                     <label>Category Image*</label>
                                     <input type="file" name="image" id="">
@@ -66,16 +35,17 @@
 
                             <div class="col-sm-12">
                                 <div class="form-group">
+                                    
                                     <label>Show Navigation *</label>                                    
                                     
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="navi" id="exampleRadios1" value="1" checked>
+                                        <input class="form-check-input" type="radio" name="navi" id="exampleRadios1" value="1"   @if($subCategories->navi == 1) checked @endif>
                                         <label class="form-check-label" for="exampleRadios1">
                                             True
                                         </label>
                                         </div>
                                         <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="navi" id="exampleRadios2" value="0">
+                                        <input class="form-check-input" type="radio" name="navi" id="exampleRadios2" value="0"  @if($subCategories->navi == 0) checked @endif>
                                         <label class="form-check-label" for="exampleRadios2">
                                             False
                                         </label>
@@ -92,7 +62,7 @@
                                         @if($categories)
                                             @foreach($categories as $category)
                                                 <?php $dash=''; ?>
-                                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                                <option value="{{$category->id}}" {{ $category->id == $subCategories->category_id ? 'selected' : '' }} >{{$category->name}}</option>
                                                 @if(count($category->subcategory))     
                                                 @endif
                                             @endforeach
@@ -104,7 +74,7 @@
                         </div>
                     </div>
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
 
                     </div>
                 </form>
@@ -130,11 +100,7 @@
                 @endif
             </div>
         </div>
+        
     </div>
 </section>
-<script>
-   CKEDITOR.replaceAll('editor1');
-
-   new DataTable('#newdatatable');
-</script>
 @endsection

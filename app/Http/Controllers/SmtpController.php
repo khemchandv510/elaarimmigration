@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Support\Str;
+use App\Models\Socialmedia;
 
 class SmtpController extends Controller
 {
@@ -16,15 +17,19 @@ class SmtpController extends Controller
         return view('smtp-config', compact('smtpconfig'));
     }
 
-    // public function store(Request $request)
-    // {
-    //    $EmailGroup = new EmailGroup;
-    //    $EmailGroup->name = $request->groupname;
-    //    $EmailGroup->unique_id = Str::random(9);
-    //    $EmailGroup->status = 1;
-       
-    //    $EmailGroup->save();
+    public function showMedia(Request $request){
+        $Socialmedia = Socialmedia::find(1);
+        return view('media', compact('Socialmedia'));
+    }
 
-    //     return redirect()->back()->with('success', 'Email group added.');
-    // }
+    public function SaveMedia(Request $request){
+
+        $Socialmedia = Socialmedia::where('id', 1)->update(['facebook' => $request->facebook, 'twitter' => $request->twitter, 'instagram' => $request->instagram , 'linkdin' => $request->lindedin, 'youtube' => $request->youtube, 'pinterest' => $request->pinterest ]);
+        return back();
+    }
+
+    // $Socialmedia = Socialmedia::where('id', 1)->update(['facebook' => $request->facebook]);
+// 
+
+   
 }

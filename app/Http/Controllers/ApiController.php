@@ -16,6 +16,7 @@ use App\Models\Blog;
 use App\Models\HomepageCard;
 use App\Models\News;
 use App\Models\Banner;
+use App\Models\Socialmedia;
 
 class ApiController extends Controller
 {
@@ -181,6 +182,12 @@ class ApiController extends Controller
     public function  HomePageCardDetails($id){
         $homepageCard = HomepageCard::find($id);
         return response()->json(['status' => true, 'message' => 'Home page card','data' => $homepageCard]);
+
+    }
+
+    public function Socialmedia(){
+        $Socialmedia = Socialmedia::find(1);
+        return response()->json(['status' => true, 'message' => 'social media','data' => $Socialmedia]);
 
     }
     
