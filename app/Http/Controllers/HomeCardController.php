@@ -318,6 +318,12 @@ class HomeCardController extends Controller
 
         return back();
     }
+
+    public function pagesDelete($id){
+        $Homepage = Page::where('id', $id)->delete();
+        return back();
+
+    }
 }
 
     

@@ -219,5 +219,6 @@ Route::middleware('auth')->group(function () {
     Route::post('sub-sub-category/{id}', [CategoryController::class, 'SubSubcategoryUpdate'])->name('subsubcategory.detail');
 
 
+    Route::get('/pages-delete/{id}', [HomeCardController::class , 'pagesDelete' ])->name('home.pagesDelete');
     
 });
