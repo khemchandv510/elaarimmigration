@@ -230,7 +230,7 @@ class CategoryController extends Controller
             'name'      => 'required|string',
             'navi'      => 'required|numeric',
             'parent_id' => 'required|nullable|numeric',
-            // 'subcategory' => 'required|nullable|numeric',
+            'subcategory' => 'required|nullable|numeric',
             'image' => 'image|mimes:jpeg,png,jpg,webp',
         ]);
 
