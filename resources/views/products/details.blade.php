@@ -539,7 +539,7 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
-     
+      
     </div>
   </div>
 </div>
@@ -821,7 +821,6 @@
     $('.modal button.close').click(function() {
         $(this).parent().parent().parent().parent().modal('hide');
     });
-
 
 </script>
 

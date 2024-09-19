@@ -212,7 +212,47 @@ class CategoryController extends Controller
         return back();        
 
     }
+
+    public function SubSubcategoryDetails($id){
+
+        $categories = Category::where('parent_id', null)->orderby('id', 'desc')->get();
+        $subSubCategories = SubSubCategory::find($id);
+        $subcategories = SubCategory::where('category_id', $subSubCategories->category_id)->orderby('id', 'desc')->get();
+        // dd($subSubCategories);
+
+        return view('category.subsubcategoryDetail', compact('subSubCategories', 'categories', 'subcategories'));
+
+    }
+
+    public function SubSubcategoryUpdate(Request $request, $id ){
+        
+    $validator = $request->validate([
+            'name'      => 'required|string',
+            'navi'      => 'required|numeric',
+            'parent_id' => 'required|nullable|numeric',
+            'subcategory' => 'required|nullable|numeric',
+            'image' => 'image|mimes:jpeg,png,jpg,webp',
+        ]);
+
+
+        $imageName = subSubCategory::find($id);
+        if($request->file('image')){
+
+            $imageName = time().'.'.$request->image->getClientOriginalExtension();
+            $request->image->move(public_path('images'), $imageName);
+        }
+
+        subSubCategory::where('id', $id)->update([
+            'name' => $request->name,
+            'category_id' => $request->parent_id,
+            'sub_category_id' => $request->subcategory,
+            'navi' => $request->navi,
+            'image' =>  $imageName->image ,
+        ]);
+
+        return redirect()->back()->with('success', 'Category has been created successfully.');
     
     
+    }
     
 }
