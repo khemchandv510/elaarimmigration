@@ -211,7 +211,7 @@ class HomeCardController extends Controller
 
         ]);
         
-        return redirect()->route(['home.edit', $page->id ]);
+        return redirect()->route('home.pages' );
         
         
     }
