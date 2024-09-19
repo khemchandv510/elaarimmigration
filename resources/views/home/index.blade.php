@@ -29,7 +29,7 @@
                             <td>
                                 <a href="{{route('home.edit', $category->id)}}"><i class="fa fa-edit" aria-hidden="true"></i></a> 
                             
-                             <!-- <a href="{{route('blog.delete', $category->id )}}"> <i class="fa fa-trash" aria-hidden="true"></i>  </a> -->
+                             <a href="{{route('home.pagesDelete', $category->id )}}"> <i class="fa fa-trash" aria-hidden="true"></i>  </a>
                             </td>
                         </tr>
                     @endforeach
