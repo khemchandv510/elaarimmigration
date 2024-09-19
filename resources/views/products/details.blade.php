@@ -539,9 +539,7 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
+      
     </div>
   </div>
 </div>
@@ -819,6 +817,11 @@
         });
     }
     
+
+
+    $('.modal button.close').click(function() {
+        $(this).parent().parent().parent().parent().modal('hide');
+    });
 
 </script>
 

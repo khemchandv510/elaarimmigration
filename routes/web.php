@@ -215,4 +215,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/media', [SmtpController::class , 'SaveMedia' ]);    
 
     
+    Route::get('sub-sub-category/{id}', [CategoryController::class, 'SubSubcategoryDetails'])->name('subsubcategory.detail');
+    Route::post('sub-sub-category/{id}', [CategoryController::class, 'SubSubcategoryUpdate'])->name('subsubcategory.detail');
+
+
+    
 });

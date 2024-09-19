@@ -4,65 +4,21 @@
 
 <section class="content">
 <div class="row">
-        <div class="col-md-8">
-            <table class="table table-striped" id="newdatatable">
-                <thead>
-                    <tr>
-                    <th scope="col">id</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Category id</th>
-
-                    <th scope="col">Sub category id</th>
-
-                    <th scope="col">Image</th>
-                    <th scope="col">Navi</th>
-                    <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    @php
-                        $count = 0;
-                    @endphp
-                    
-                @if($subSubCategories)
-                    @foreach($subSubCategories as $category)
-                    @php $count++; @endphp
-                        <tr>
-                        <th scope="row">{{$count }}</th>
-                        <td>{{$category->name }}</td>
-                            <td>{{@$category->mainCategory->name }}</td>
-                            <td>{{@$category->subCategory->name }}</td>
-                            <td> @if($category->image)
-                                <img src="{{ asset('/public/images') }}/{{$category->image}}" width="100px">
-                                @endif
-                            </td>
-                            <td>@if($category->navi == 0)  False @else True @endif </td>
-                            <td><a href="{{route('subsubcategory.detail', $category->id)}}"><i class="fa fa-edit" aria-hidden="true"></i></a> 
-                            
-                            <a href="{{route('sub-sub-category.delete', $category->id)}}"> <i class="fa fa-trash" aria-hidden="true"></i>  </a>
-                            </td>
-                        </tr>
-                    @endforeach
-                @endif
-                    
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-4">
+        
+        <div class="col-md-7">
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">Create Category</h3>
                 </div>
                 
-                <form role="form" method="post" enctype="multipart/form-data">
+                <form action="" role="form" method="post" enctype="multipart/form-data">
                     {{csrf_field()}}
                     <div class="box-body">
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Category name*</label>
-                                    <input type="text" name="name" class="form-control" placeholder="Category name" value="{{old('name')}}" required />
+                                    <input type="text" name="name" class="form-control" placeholder="Category name" value="{{ $subSubCategories->name }}" required />
                                 </div>
                             </div>
 
@@ -78,13 +34,13 @@
                                     <label>Show Navigation *</label>                                    
                                     
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="navi" id="exampleRadios1" value="1" checked>
+                                        <input class="form-check-input" type="radio" name="navi" id="exampleRadios1" value="1"   @if($subSubCategories->navi == 1) checked @endif>
                                         <label class="form-check-label" for="exampleRadios1">
                                             True
                                         </label>
                                         </div>
                                         <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="navi" id="exampleRadios2" value="0">
+                                        <input class="form-check-input" type="radio" name="navi" id="exampleRadios2" value="0"  @if($subSubCategories->navi == 0) checked @endif>
                                         <label class="form-check-label" for="exampleRadios2">
                                             False
                                         </label>
@@ -98,10 +54,10 @@
                                     <label>Select parent category*</label>
                                     <select type="text" name="parent_id" class="form-control" onchange="getsubcategroy(this.value)" required>
                                             <option value="">None</option>
-                                        @if($categories)
+                                            @if($categories)
                                             @foreach($categories as $category)
                                                 <?php $dash=''; ?>
-                                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                                <option value="{{$category->id}}" {{ $category->id == $subSubCategories->category_id ? 'selected' : '' }} >{{$category->name}}</option>
                                                 @if(count($category->subcategory))     
                                                 @endif
                                             @endforeach
@@ -114,8 +70,13 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Select Sub category*</label>
-                                    <select type="text" id="subcategory" name="subcategory" class="form-control" required>
-                                       <option value="">None</option>
+                                    <select type="text" id="subcategory" name="subcategory" class="form-control" >
+                                    <option value="">None</option>
+                                            @foreach($subcategories as $category)
+                                                <?php $dash=''; ?>
+                                                <option value="{{$category->id}}" {{ $category->id == $subSubCategories->sub_category_id ? 'selected' : '' }} >{{$category->name}}</option>
+                                               
+                                            @endforeach
                                         
                                     </select>
                                 </div>
@@ -182,5 +143,28 @@
 
 <script>
 new DataTable('#newdatatable');
+
+function getsubcategroy(id){
+
+axios({
+    method: 'get',
+    url: "{{ env('APP_URL') }}/sub-categories/"+id,
+    data: {
+        id: 'Fred',
+        lastName: 'Flintstone'
+    }
+}).then(function (response) {
+    console.log(response.data.data);
+
+    var html=''
+    html = '<option value=""> None </option>'
+    response.data.data.forEach(category => {
+            html += ` <option value="${category.id}"> ${category.name } </option>`
+    });
+
+    document.getElementById('subcategory').innerHTML = html;
+    
+});        
+}
 </script>
 @endsection
