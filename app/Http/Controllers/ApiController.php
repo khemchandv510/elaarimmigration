@@ -17,6 +17,9 @@ use App\Models\HomepageCard;
 use App\Models\News;
 use App\Models\Banner;
 use App\Models\Socialmedia;
+// use GuzzleHttp\Client;
+use App\Models\Client;
+
 
 class ApiController extends Controller
 {
@@ -190,7 +193,17 @@ class ApiController extends Controller
         return response()->json(['status' => true, 'message' => 'social media','data' => $Socialmedia]);
 
     }
+
+    public function allClients(){
+        $Socialmedia = Client::all();
+        return response()->json(['status' => true, 'message' => 'all cients','data' => $Socialmedia]);
+    }
+
+    public function ClientDetails($id){
+        $Socialmedia = Client::find($id);
+        return response()->json(['status' => true, 'message' => 'all cients','data' => $Socialmedia]);
+    }
     
-   
+    
     
 }

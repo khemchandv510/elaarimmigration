@@ -225,7 +225,7 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Title</label>
-                    <input type="text" class="form-control" required id="exampleFormControlInput1" value="{{$Homepage->keyword_title}}" name="customKeyword" placeholder="">
+                    <input type="text" class="form-control"  id="exampleFormControlInput1" value="{{$Homepage->keyword_title}}" name="customKeyword" placeholder="">
                 </div>
 
 
@@ -425,13 +425,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="exampleInputEmail1"> Video Link</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" name="videoLink" required>
+                        <input type="text" class="form-control" id="exampleInputEmail1" name="videoLink" >
                     </div>
                 </div>
                  <div class="col-md-12">
                     <div class="form-group">
                         <label for="exampleInputEmail1"> Title</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" name="titlename" required>
+                        <input type="text" class="form-control" id="exampleInputEmail1" name="titlename" >
                     </div>
                 </div>
 
@@ -439,7 +439,7 @@
 
             <div class="form-group">
                 <label for="exampleInputPassword1">Description</label>
-                <textarea class="form-control editor1" name="description" rows="3"> </textarea>
+                <textarea class="form-control editor1" name="description" rows="3" required> </textarea>
             </div>
            
             <button type="submit" class="btn btn-primary">Submit</button>
@@ -578,14 +578,14 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="exampleInputEmail1"> Video Link</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" name="videoLink" required>
+                        <input type="text" class="form-control" id="exampleInputEmail1" name="videoLink" >
                     </div>
                 </div>
                 
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="exampleInputEmail1"> Title</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" name="titlename" required>
+                        <input type="text" class="form-control" id="exampleInputEmail1" name="titlename" >
                     </div>
                 </div>
 
@@ -593,7 +593,7 @@
 
             <div class="form-group">
                 <label for="exampleInputPassword1">Description</label>
-                <textarea class="form-control editor1" id="editPageContentdesc" name="description" rows="3"> </textarea>
+                <textarea class="form-control editor1" id="editPageContentdesc" name="description" rows="3" required> </textarea>
             </div>
            
             <button type="submit" class="btn btn-primary">Submit</button>

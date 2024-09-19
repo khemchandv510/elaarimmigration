@@ -145,7 +145,7 @@ class FaqController extends Controller
         $validator = $request->validate([
             'pageImage'      => 'image|mimes:jpeg,png,jpg,webp|max:1024',
             // 'videoLink'      => 'required',
-            'product_id'      => 'required|numeric',
+            // 'product_id'      => 'required|numeric',
             'pagecontent_id' =>  'required|numeric'
         ]);
 

@@ -43,6 +43,11 @@ Route::get('pages', [ApiController::class, 'allPages']);
 Route::get('pages/{id}', [ApiController::class, 'pageDetails']);
 Route::get('social-media', [ApiController::class, 'Socialmedia']);
 
+Route::get('clients', [ApiController::class, 'allClients']);
+Route::get('clients/{id}', [ApiController::class, 'ClientDetails']);
+
+
+
 
 
 
