@@ -115,7 +115,7 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Title</label>
-                    <input type="text" class="form-control" required id="exampleFormControlInput1" value="{{$products->faq_title}}" name="faqtitle" placeholder="">
+                    <input type="text" class="form-control"  id="exampleFormControlInput1" value="{{$products->faq_title}}" name="faqtitle" placeholder="">
                 </div>
 
 
@@ -169,7 +169,7 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Title</label>
-                    <input type="text" class="form-control" required id="exampleFormControlInput1" value="{{$products->keyword_title}}" name="customKeyword" placeholder="">
+                    <input type="text" class="form-control"  id="exampleFormControlInput1" value="{{$products->keyword_title}}" name="customKeyword" placeholder="">
                 </div>
 
 
