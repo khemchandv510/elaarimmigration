@@ -11,6 +11,7 @@ use App\Http\Controllers\BlogController;
 
 use App\Http\Controllers\HomeCardController;
 use App\Http\Controllers\SmtpController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -220,5 +221,10 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/pages-delete/{id}', [HomeCardController::class , 'pagesDelete' ])->name('home.pagesDelete');
+    Route::get('/Company', [ProfileController::class , 'company' ])->name('home.company');
+
+    Route::post('/Company', [ProfileController::class , 'companyUpdate' ]);
+
+
     
 });

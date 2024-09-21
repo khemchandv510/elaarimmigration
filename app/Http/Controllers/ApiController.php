@@ -24,7 +24,7 @@ use App\Models\Client;
 class ApiController extends Controller
 {
     public function categories(Request $request){
-        $Category = Category::get();
+        $Category = Category::orderby('position', 'asc')->get();
        
         $Category->map(function ($item) {
             $item->navi = $item->navi == 1 ? true : false;
@@ -36,7 +36,7 @@ class ApiController extends Controller
     }
 
     public function subCategory(Request $request){
-        $subSubCategories = SubCategory::get();
+        $subSubCategories = SubCategory::orderby('position', 'asc')->get();
         $subSubCategories->map(function ($item) {
             $item->navi = $item->navi == 1 ? true : false;
             return $item;
@@ -46,7 +46,7 @@ class ApiController extends Controller
 
     
     public function subSubCategory(Request $request){
-        $subSubCategories = SubSubCategory::get();
+        $subSubCategories = SubSubCategory::orderby('position', 'asc')->get();
         $subSubCategories->map(function ($item) {
             $item->navi = $item->navi == 1 ? true : false;
             return $item;
