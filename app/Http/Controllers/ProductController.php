@@ -53,7 +53,7 @@ class ProductController extends Controller
         // dd($request);
 
         $validator = $request->validate([
-            'pageName'      => 'required|string',
+            'pageName'      => 'required|string|unique:products,name',
             'category'      => 'required|numeric',
             // 'subcategory' => 'required|numeric',
             'image' => 'image|mimes:jpeg,png,jpg,webp|max:1024',
