@@ -12,6 +12,7 @@
                     <th scope="col">Name</th>
                     <th scope="col">Image</th>
                     <th scope="col">Navi</th>
+                    <th scope="col">Position </th>
                     <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -34,11 +35,13 @@
                                 @endif
                             </td>
                             <td>@if($category->navi == 0)  False @else True @endif </td>
+                            <td>{{$category->position }}</td>
                             <td><a href="{{route('category.detail', $category->id)}}"><i class="fa fa-edit" aria-hidden="true"></i></a> 
                             <a href="{{route('category.delete', $category->id)}}"> <i class="fa fa-trash" aria-hidden="true"></i>  </a>
                             
 
                             </td>
+                        
                         </tr>
                     @endforeach
                 @endif
@@ -87,6 +90,13 @@
                                         </label>
                                     </div>
 
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>position </label>
+                                    <input type="number" name="position" class="form-control" placeholder="Category position"  required />
                                 </div>
                             </div>
 
