@@ -117,6 +117,24 @@
         </a>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('home.company')}}">
+            <svg class="nav-icon">
+                <use xlink:href="{{ asset('icons/coreui.svg#cil-speedometer') }}"></use>
+            </svg>
+            {{ __('Company ') }}
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/">
+            <svg class="nav-icon">
+                <use xlink:href="{{ asset('icons/coreui.svg#cil-speedometer') }}"></use>
+            </svg>
+            {{ __('Inquiry ') }}
+        </a>
+    </li>
+
+
     <!--<li class="nav-item">-->
     <!--    <a class="nav-link" href="{{ url('send-email') }}">-->
     <!--        <svg class="nav-icon">-->
