@@ -168,7 +168,7 @@ class HomeCardController extends Controller
     }
 
     public function pages(){
-        $home = Page::all();
+        $home = Page::where('id', '!=', 1 )->get();
         return view('home.index', compact('home'));
     }
 
@@ -177,6 +177,11 @@ class HomeCardController extends Controller
     }
 
     public function CreatePageDynamic(Request $request){
+
+        $validator = $request->validate([
+            'pageName'      => 'required|string|unique:pages,page_name',
+            // 'category'      => 'required|numeric',
+        ]);
 
         $destopImage  = null;
         if($request->hasFile('destopImage')){
