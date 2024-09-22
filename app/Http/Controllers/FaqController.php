@@ -7,6 +7,8 @@ use App\Models\Faq;
 use App\Models\PageContent;
 use App\Models\Keyword;
 use App\Models\CustomAdd;
+use App\Models\Pagecard;
+
 class FaqController extends Controller
 {
     public function  saveFaq(Request $request){
@@ -70,6 +72,40 @@ class FaqController extends Controller
         ]);
 
         return back()->with('success', 'Keywords has been created successfully.');
+    }
+
+    public function savepageCard(Request $request){
+        $faq = Pagecard::create([
+            'product_id' => $request->product_id,
+            'keyword' => $request->keywordName,
+            'url' => $request->keywordUrl,
+
+        ]);
+        return back()->with('success', 'Page card has been created successfully.');
+        
+    }
+
+    
+    public function UpdatePageCard(Request $request){
+        $faq = Pagecard::where('id', $request->editPagecardId)->update([
+            'keyword' => $request->keywordName,
+            'url' => $request->keywordUrl,
+        ]);
+
+        return back()->with('success', 'Page card has been updated successfully.');
+    }
+
+    
+    public function deleteSavepageCard($id){
+        $faq = Pagecard::where('id', $id)->delete();
+
+        return back()->with('success', 'Page card has been updated successfully.');
+    }
+
+    
+    public function getSavepageCard($id){
+        $faq = Pagecard::find($id);
+        return response()->json(['status' => true,  'data' => $faq]);
     }
 
 

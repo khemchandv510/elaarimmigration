@@ -11,6 +11,7 @@ use App\Models\PageContent;
 use App\Models\Keyword;
 use App\Models\SubSubCategory;
 use App\Models\CustomAdd;
+use App\Models\Pagecard;
 
 class ProductController extends Controller
 {
@@ -34,8 +35,10 @@ class ProductController extends Controller
         $keyword = Keyword::where('product_id', $id)->get();
 
         $CustomAdd = CustomAdd::where('product_id', $id)->get();
+        
+        $pagecardData = Pagecard::where('product_id', $id)->get();
 
-        return view('products.details', compact('products', 'category', 'faqs', 'pageContent', 'keyword', 'CustomAdd', 'subCategory', 'subSubCategory'));
+        return view('products.details', compact('products', 'category', 'faqs', 'pageContent', 'keyword', 'CustomAdd', 'subCategory', 'subSubCategory', 'pagecardData' ));
     }
 
 
@@ -105,7 +108,9 @@ class ProductController extends Controller
             'dynamic_body' => $request->scriptBody,
             'footer_desc' => $request->footerdescription, 
             'faq_title' => $request->faqtitle,
-             'keyword_title' => $request->customKeyword
+             'keyword_title' => $request->customKeyword,
+             'PcardTitle' => $request->PcardTitle,
+             'pageCardDescription' => $request->pageCardDescription
 
 
         ]);    

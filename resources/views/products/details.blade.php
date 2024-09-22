@@ -60,6 +60,62 @@
         </div>
 
 
+        <!-- page card -->
+        <div class="card bg-light mb-3">
+            <div class="card-header">Page card </div>
+            <div class="card-body">
+
+
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Title</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1"  name="PcardTitle" value="{{$products->PcardTitle}}" placeholder="name">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Description</label>
+                <textarea class="form-control editor1" name="pageCardDescription" rows="3">{{$products->pageCardDescription}} </textarea>
+            </div>
+
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPageCardModal"> Add page card </button>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Keyword</th>
+                    <th scope="col">Url</th>
+                    <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
+                    $count = 0
+                    @endphp
+                    @foreach($pagecardData as $page)
+                    
+                    <tr>
+                    <th scope="row">{{$page->id}}</th>
+                    <td>{{ $page->keyword }}</td>
+                    <td>{{ $page->url }}</td>
+                    <td> 
+                     <button type="button" class="btn btn-primary" onclick="editpagecard({{ $page->id }})" > <i class="fa fa-edit" aria-hidden="true"></i> </button>
+                    
+                    <a href="{{route('delete.pageCard', $page->id)}}"><i class="fa fa-trash" aria-hidden="true"></i> </a>
+                    
+                    </td>
+                    </tr>
+                @endforeach
+                </tbody>
+                </table>
+
+              
+            </div>
+        </div>
+
+        <!-- end page card -->
+
+
+
         <!-- page content -->
         <div class="card bg-light mb-3">
             <div class="card-header">Page content</div>
@@ -620,9 +676,7 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
+      
     </div>
   </div>
 </div>
@@ -673,13 +727,91 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+     
+    </div>
+  </div>
+</div>
+
+
+<!-- addPageCardModal -->
+<div class="modal fade" id="addPageCardModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="addPageContentLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addPageContentLabel"> Add page card </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form method="post" action="{{ route('save.pageCard') }}" enctype="multipart/form-data">
+        @csrf
+        <input type="hidden" name="product_id" value="{{$products->id}}">
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1"> Keyword</label>
+                        <input type="text" class="form-control" name="keywordName" required>
+                    </div>
+                </div>
+               
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1"> Keyword Url </label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" name="keywordUrl" required>
+                    </div>
+                </div>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
       </div>
     </div>
   </div>
 </div>
 
+
+<!-- edit page card -->
+
+<div class="modal fade" id="editPageCardModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="addPageContentLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addPageContentLabel"> Edit page card </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form method="post" action="{{ route('update.pageCard') }}" enctype="multipart/form-data">
+        @csrf
+        <input type="hidden" name="editPagecardId" value="">
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1"> Keyword</label>
+                        <input type="text" class="form-control" name="keywordName" required>
+                    </div>
+                </div>
+               
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1"> Keyword Url </label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" name="keywordUrl" required>
+                    </div>
+                </div>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
    CKEDITOR.replaceAll('editor1'); 
@@ -816,12 +948,32 @@
 
         });
     }
+
+    function editpagecard(id){
+
+        axios({
+            method: 'get',
+            url: "{{ env('APP_URL') }}/get-page-card/"+id,
+            data: {
+                id: id
+            }
+        }).then(function (response) {
+
+            $('#editPageCardModal input[name=keywordName]').val(response.data.data.keyword);
+            $('#editPageCardModal input[name=keywordUrl]').val(response.data.data.url);
+            $('#editPageCardModal input[name=editPagecardId]').val(id);
+
+            $('#editPageCardModal').modal('show');
+
+        });
+    }
     
 
 
     $('.modal button.close').click(function() {
         $(this).parent().parent().parent().parent().modal('hide');
     });
+
 
 </script>
 
