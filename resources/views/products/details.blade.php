@@ -352,6 +352,53 @@
             <textarea class="form-control editor1" name="footerdescription" rows="3">{{$products->footer_desc}} </textarea>
         </div>
 
+
+        <div class="form-group">
+            <label>Inquiry form </label>
+                <div class="form-check ">
+                    <input class="form-check-input" type="radio" name="inquiry" id="inlineRadio1" value="1" @if($products->inquiry == 1) checked @endif>
+                    <label class="form-check-label" for="inlineRadio1"> Show </label>
+                </div>
+                <div class="form-check ">
+                    <input class="form-check-input" type="radio" name="inquiry" id="inlineRadio2" value="0" @if($products->inquiry == 0) checked @endif>
+                    <label class="form-check-label" for="inlineRadio2">Hide</label>
+                </div>
+        </div>
+
+        <div class="form-group">
+            <label>Show Navigation </label>
+            
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="navigation" id="exampleRadios1" value="1" @if($products->navigation == 1) checked @endif>
+                <label class="form-check-label" for="exampleRadios1">
+                    Show
+                </label>
+                </div>
+                <div class="form-check">
+                <input class="form-check-input" type="radio" name="navigation" id="exampleRadios2" value="0" @if($products->navigation == 0) checked @endif>
+                <label class="form-check-label" for="exampleRadios2">
+                    Hide
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Topics </label>
+            <div class="form-check ">
+                <input class="form-check-input" type="radio" name="topices" id="topics1" value="1" @if($products->topices == 1) checked @endif>
+                <label class="form-check-label" for="topics1">
+                    SHow
+                </label>
+                </div>
+                <div class="form-check">
+                <input class="form-check-input" type="radio" name="topices" id="topics2" value="0" @if($products->topices == 0) checked @endif>
+                <label class="form-check-label" for="topics2">
+                    Hide
+                </label>
+            </div>
+
+        </div>
+
         <button type="submit" class="btn btn-primary">Save </button>
     </form>
 </div>

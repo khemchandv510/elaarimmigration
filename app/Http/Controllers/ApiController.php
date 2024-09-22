@@ -16,6 +16,7 @@ use App\Models\Blog;
 use App\Models\HomepageCard;
 use App\Models\News;
 use App\Models\Banner;
+use App\Models\Pagecard;
 use App\Models\Socialmedia;
 
 class ApiController extends Controller
@@ -65,11 +66,28 @@ class ApiController extends Controller
 
     public function ProductDetails(Request $request, $id){
         $product = Product::where('id', $id)->first();
+        if($product->inquiry == 0){
+            $product->inquiry = false; 
+        }else{
+            $product->inquiry = true;
+        }
+        if($product->navigation == 0){
+            $product->navigation = false; 
+        }else{
+            $product->navigation = true;
+        }
+        if($product->topices == 0){
+            $product->topices = false; 
+        }else{
+            $product->topices = true;
+        }
        
             $product->faqs = Faq::where('product_id', $product->id)->get();
             $product->PageContent = PageContent::where('product_id', $product->id)->get();
             $product->Keyword =Keyword::where('product_id', $product->id)->get();
             $product->customAdds =CustomAdd::where('product_id', $product->id)->get();
+            $product->pageCard = Pagecard::where('product_id', $product->id)->get();
+
 
         
         return response()->json(['status' => true, 'message' => 'all products','data' => $product]);

@@ -23,7 +23,10 @@ class Product extends Model
             'faq_title',
             'keyword_title',
             'pageCardDescription',
-            'PcardTitle'
+            'PcardTitle',
+            'topices',
+            'navigation',
+            'inquiry'
             
     ];
 }

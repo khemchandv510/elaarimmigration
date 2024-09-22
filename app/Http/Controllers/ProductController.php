@@ -92,6 +92,7 @@ class ProductController extends Controller
             'image' => 'image|mimes:jpeg,png,jpg,webp|max:1024',
         ]);
         // dd($id);
+        // dd($request);
 
         $products = Product::where(['id' => (int)$id])->update([
             'name' => $request->pageName,
@@ -110,7 +111,10 @@ class ProductController extends Controller
             'faq_title' => $request->faqtitle,
              'keyword_title' => $request->customKeyword,
              'PcardTitle' => $request->PcardTitle,
-             'pageCardDescription' => $request->pageCardDescription
+             'pageCardDescription' => $request->pageCardDescription,
+             'topices' => $request->topices,
+             'navigation' => $request->navigation,
+             'inquiry' => $request->inquiry
 
 
         ]);    
