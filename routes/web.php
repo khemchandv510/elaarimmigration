@@ -226,5 +226,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/Company', [ProfileController::class , 'companyUpdate' ]);
 
 
+    Route::post('save-page-card', [FaqController::class, 'savepageCard'])->name('save.pageCard');
+    Route::get('get-page-card/{id}', [FaqController::class, 'getSavepageCard'])->name('get.pageCard');
+    Route::get('delete-page-card/{id}', [FaqController::class, 'deleteSavepageCard'])->name('delete.pageCard');
+    Route::post('update-page-card', [FaqController::class, 'UpdatePageCard'])->name('update.pageCard');
+
+    // 
+
+
     
 });
