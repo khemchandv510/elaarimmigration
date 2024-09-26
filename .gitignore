@@ -23,3 +23,4 @@ error_log
 .htaccess
 *.sql
 /public/images
+/public/ckeditor

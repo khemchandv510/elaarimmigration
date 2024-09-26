@@ -336,7 +336,7 @@
 
                 <div class="form-group">
                     <label for="exampleFormControlInput1">SEO url</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1" name="seourl" placeholder="" value="{{$products->seo_url}}">
+                    <input type="text" class="form-control" id="exampleFormControlInput1" name="seourl" placeholder="" value="{{$products->seo_url}}" required>
                 </div>
 
                 <div class="form-group">
