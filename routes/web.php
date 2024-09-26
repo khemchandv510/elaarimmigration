@@ -230,7 +230,7 @@ Route::middleware('auth')->group(function () {
     Route::get('get-page-card/{id}', [FaqController::class, 'getSavepageCard'])->name('get.pageCard');
     Route::get('delete-page-card/{id}', [FaqController::class, 'deleteSavepageCard'])->name('delete.pageCard');
     Route::post('update-page-card', [FaqController::class, 'UpdatePageCard'])->name('update.pageCard');
-    Route::get('delete-page-image/{id}', [FaqController::class, 'deletePageImage']);
+    Route::get('delete-page-image/{id}', [FaqController::class, 'deletePageImage'])->name('delete.pageImage');;
 
 
     // 
