@@ -142,7 +142,11 @@
                     <tr>
                     <th scope="row">{{$page->id}}</th>
                     
-                    <td> <img src="{{ asset('/public/images') }}/{{$page->image}}" width="100px"> </td>
+                    <td> <img src="{{ asset('/public/images') }}/{{$page->image}}" width="100px"> 
+                        @if($page->image != null)
+                     <a href="{{route('delete.pageImage', $page->id)}}"><i class="fa fa-trash" aria-hidden="true"></i> </a>
+                        @endif
+                    </td>
                     <td>{{$page->url}}</td>
                     <td>
                         <textarea class="form-control editor1" readonly  rows="3"> {{$page->description}} </textarea>
@@ -616,7 +620,7 @@
                         <label for="exampleInputEmail1"> Upload Image</label>
                         <input type="file" name="pageImage" >
                     </div>
-                    <a class="btn btn-primary deleteimage" href="#"  role="button">Delete image </a>
+                    <!-- <a class="btn btn-primary deleteimage" href="#"  role="button">Delete image </a> -->
                 </div>
                
                 <div class="col-md-6">
@@ -931,7 +935,7 @@
             $('#editPageContent input[name=videoLink]').val(response.data.data.url);
             $('#editPageContent input[name=titlename]').val(response.data.data.product_title);
             $('#editPageContent input[name=pagecontent_id]').val(id);
-            $('#editPageContent .deleteimage').attr('href', '/delete-page-image/'+id);
+            // $('#editPageContent .deleteimage').attr('href', '/delete-page-image/'+id);
 
             // 
             $('#editPageContent').modal('show');
