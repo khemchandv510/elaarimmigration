@@ -58,6 +58,22 @@ class ApiController extends Controller
     public function allProducts(Request $request){
         $product = Product::get();
         foreach($product as $data){
+            if($data->inquiry == 0){
+                $data->inquiry = false; 
+            }else{
+                $data->inquiry = true;
+            }
+            if($data->navigation == 0){
+                $data->navigation = false; 
+            }else{
+                $data->navigation = true;
+            }
+            if($data->topices == 0){
+                $data->topices = false; 
+            }else{
+                $data->topices = true;
+            }
+
             $data->faqs = Faq::where('product_id', $data->id)->get();
             $data->PageContent = PageContent::where('product_id', $data->id)->get();
             $data->Keyword =Keyword::where('product_id', $data->id)->get();
