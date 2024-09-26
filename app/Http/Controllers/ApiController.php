@@ -62,6 +62,7 @@ class ApiController extends Controller
             $data->PageContent = PageContent::where('product_id', $data->id)->get();
             $data->Keyword =Keyword::where('product_id', $data->id)->get();
             $data->customAdds =CustomAdd::where('product_id', $data->id)->get();
+            $data->pageCard = Pagecard::where('product_id', $data->id)->get();
 
         }
         return response()->json(['status' => true, 'message' => 'all products','data' => $product]);
