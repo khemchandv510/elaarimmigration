@@ -252,5 +252,14 @@ class FaqController extends Controller
 
         return back();
     }
+
+    public function deletePageImage($id){
+        PageContent::where('id', $id)->update([
+           
+            'image' => null,
+        ]);
+
+        return back()->with('success', 'Page content has been created successfully.');
+    }
     
 }

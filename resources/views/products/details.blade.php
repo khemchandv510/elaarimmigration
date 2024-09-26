@@ -616,6 +616,7 @@
                         <label for="exampleInputEmail1"> Upload Image</label>
                         <input type="file" name="pageImage" >
                     </div>
+                    <a class="btn btn-primary deleteimage" href="#"  role="button">Delete image </a>
                 </div>
                
                 <div class="col-md-6">
@@ -930,6 +931,8 @@
             $('#editPageContent input[name=videoLink]').val(response.data.data.url);
             $('#editPageContent input[name=titlename]').val(response.data.data.product_title);
             $('#editPageContent input[name=pagecontent_id]').val(id);
+            $('#editPageContent .deleteimage').attr('href', '/delete-page-image/'+id);
+
             // 
             $('#editPageContent').modal('show');
 
