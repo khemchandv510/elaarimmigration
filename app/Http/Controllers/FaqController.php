@@ -21,7 +21,7 @@ class FaqController extends Controller
 
         $faq = Faq::create([
             'name' => $request->faqtitle,
-            'description' => $request->footerdescription,
+            'description' => $request->addfooterdescription,
             'product_id' => isset($request->product_id) ? $request->product_id : null ,
             'page_id' => isset($request->page_id) ? $request->page_id : null
          ]);

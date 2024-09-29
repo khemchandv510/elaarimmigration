@@ -142,8 +142,9 @@
                     <tr>
                     <th scope="row">{{$page->id}}</th>
                     
-                    <td> <img src="{{ asset('/public/images') }}/{{$page->image}}" width="100px"> 
+                    <td> 
                         @if($page->image != null)
+                        <img src="{{ asset('/public/images') }}/{{$page->image}}" width="100px"> 
                      <a href="{{route('delete.pageImage', $page->id)}}"><i class="fa fa-trash" aria-hidden="true"></i> </a>
                         @endif
                     </td>
@@ -430,7 +431,7 @@
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Answer title</label>
-                <textarea class="form-control editor1" name="footerdescription" rows="3"> </textarea>
+                <textarea class="form-control editor1" name="addfooterdescription" rows="3"> </textarea>
             </div>
            
             <button type="submit" class="btn btn-primary">Submit</button>
