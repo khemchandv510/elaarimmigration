@@ -85,7 +85,7 @@ class ApiController extends Controller
     }
 
     public function ProductDetails(Request $request, $id){
-        $product = Product::where('id', $id)->first();
+        $product = Product::where('seo_url', $id)->first();
         if($product->inquiry == 0){
             $product->inquiry = false; 
         }else{
