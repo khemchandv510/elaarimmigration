@@ -8,7 +8,7 @@
         <div class="col-md-7">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Create Category</h3>
+                    <h3 class="box-title">Edit Category</h3>
                 </div>
                 
                 <form action="" role="form" method="post" enctype="multipart/form-data">
@@ -86,6 +86,13 @@
                                 <div class="form-group">
                                     <label>position </label>
                                     <input type="number" name="position" class="form-control" placeholder="Category position" value="{{$subSubCategories->position}}" required />
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label> Slug  </label>
+                                    <input type="text" name="slug" class="form-control" placeholder="Category slug" value="{{$subSubCategories->slug}}" required />
                                 </div>
                             </div>
 

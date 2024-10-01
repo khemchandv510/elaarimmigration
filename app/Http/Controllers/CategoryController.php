@@ -38,7 +38,7 @@ class CategoryController extends Controller
 
             Category::create([
                 'name' => $request->name,
-                'slug' =>  Str::random(9),
+                'slug' =>  $request->slug,
                 // 'parent_id' => $request->parent_id,
                 'navi' => $request->navi,
                 'image' => isset($imageName) ? $imageName : null,
@@ -85,7 +85,9 @@ class CategoryController extends Controller
             'name' => $request->name,
             'navi' => $request->navi,
             'image' => isset($imageName) ? $imageName : $catIdCheck->image,
-            'position' => $request->position
+            'position' => $request->position,
+            'slug' =>  $request->slug
+            
         ]);
 
         return redirect()->back()->with('success', 'Category has been updated successfully.');
@@ -120,7 +122,9 @@ class CategoryController extends Controller
             'category_id' => $request->parent_id,
             'navi' => $request->navi,
             'image' => isset($imageName) ? $imageName : null,
-            'position' => $request->position
+            'position' => $request->position,
+            'slug' => $request->slug
+
         ]);
 
         return redirect()->back()->with('success', 'Category has been created successfully.');
@@ -162,7 +166,9 @@ class CategoryController extends Controller
             'sub_category_id' => $request->subcategory,
             'navi' => $request->navi,
             'image' => isset($imageName) ? $imageName : null,
-            'position' => $request->position
+            'position' => $request->position,
+            'slug' => $request->slug
+
         ]);
 
         return redirect()->back()->with('success', 'Category has been created successfully.');
@@ -212,7 +218,8 @@ class CategoryController extends Controller
             'category_id' => $request->parent_id,
             'navi' => $request->navi,
             'image' => $imageName ,
-            'position' => $request->position
+            'position' => $request->position,
+            'slug' => $request->slug
         ]);
         return redirect()->back()->with('success', 'sub Category has been updated successfully.');      
 
@@ -254,7 +261,9 @@ class CategoryController extends Controller
             'sub_category_id' => $request->subcategory,
             'navi' => $request->navi,
             'image' =>  $imageName ,
-            'position' => $request->position
+            'position' => $request->position,
+            'slug' => $request->slug
+
         ]);
 
         return redirect()->back()->with('success', 'Category has been updated successfully.');
