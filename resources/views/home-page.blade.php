@@ -384,7 +384,7 @@
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Answer title</label>
-                <textarea class="form-control editor1" name="footerdescription" rows="3"> </textarea>
+                <textarea class="form-control editor1" name="addfooterdescription" rows="3"> </textarea>
             </div>
            
             <button type="submit" class="btn btn-primary">Submit</button>
