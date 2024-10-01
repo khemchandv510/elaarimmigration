@@ -109,6 +109,14 @@
                                     <input type="number" name="position" class="form-control" placeholder="Category position"  required />
                                 </div>
                             </div>
+
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Slug </label>
+                                    <input type="text" name="slug" class="form-control" placeholder="Category slug"  required />
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                     <div class="box-footer">

@@ -78,6 +78,14 @@
                                 </div>
                             </div>
 
+
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Slug  </label>
+                                    <input type="text" name="slug" class="form-control" placeholder="Category slug" value="{{$subCategories->slug}}" required />
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                     <div class="box-footer">
