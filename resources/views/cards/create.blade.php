@@ -30,6 +30,13 @@
                 </div>
                 
                 
+                <div class="col-md-6">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Link Name </label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1"  name="name" >
+                </div>
+                </div>
+
                 
                 <div class="col-md-6">
                 <div class="form-group">

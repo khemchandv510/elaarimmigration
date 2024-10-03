@@ -51,7 +51,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 p-4">
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">Create Category</h3>
@@ -126,7 +126,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>position </label>
-                                    <input type="number" name="position" class="form-control" placeholder="Category position"  required />
+                                    <input type="number" name="position" class="form-control" placeholder="Category position"   />
                                 </div>
                             </div>
 

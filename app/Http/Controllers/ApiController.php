@@ -114,7 +114,7 @@ class ApiController extends Controller
     }
         
     public function subCategories(Request $request, $id){
-        $subSubCategories = SubCategory::where('category_id', $id)->get();
+        $subSubCategories = SubCategory::where('category_id', $id)->orderby('position', 'asc')->get();
         $subSubCategories->map(function ($item) {
             $item->navi = $item->navi == 1 ? true : false;
             return $item;
@@ -210,6 +210,8 @@ class ApiController extends Controller
 
         $homepageCard->map(function ($item) {
             $item->category_id = $item->mainCategory->name;
+            $item->category_image = $item->mainCategory->image;
+
             return $item;
         });
 

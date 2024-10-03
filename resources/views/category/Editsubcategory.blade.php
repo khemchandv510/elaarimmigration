@@ -74,7 +74,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>position </label>
-                                    <input type="number" name="position" class="form-control" placeholder="Category position" value="{{$subCategories->position}}" required />
+                                    <input type="number" name="position" class="form-control" placeholder="Category position" value="{{$subCategories->position}}"  />
                                 </div>
                             </div>
 

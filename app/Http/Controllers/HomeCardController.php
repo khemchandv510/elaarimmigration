@@ -62,6 +62,7 @@ class HomeCardController extends Controller
             'url3' => $request->url3,
             'custom_name4' => $request->custom_name4,
             'url4' => $request->url4,
+            'name' => $request->name,
             
             
             ]);
@@ -88,7 +89,7 @@ class HomeCardController extends Controller
             'url3' => $request->url3,
             'custom_name4' => $request->custom_name4,
             'url4' => $request->url4,
-            
+            'name' => $request->name,
             
             ]);
             
