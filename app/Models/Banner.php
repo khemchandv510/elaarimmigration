@@ -11,6 +11,7 @@ class Banner extends Model
 
     protected $fillable = [
         'id',
+        'name',
         'page_id',
        	'destop',
         'mobile', 

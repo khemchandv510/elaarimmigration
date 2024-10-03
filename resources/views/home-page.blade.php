@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Banner Url  </label>
                         <input type="text" class="form-control"  name="bannerUrl" value="{{$Homepage->banner_url}}">
@@ -782,6 +782,13 @@
 
                 <div class="col-md-6">
                     <div class="form-group">
+                        <label for="exampleInputEmail1"> Link name </label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" name="name" >
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
                         <label for="exampleInputEmail1"> Banner Url </label>
                         <input type="text" class="form-control" id="exampleInputEmail1" name="bannerUrl" >
                     </div>
@@ -844,6 +851,13 @@
                 </div>
 
                 <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1"> Link name </label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" name="name" >
+                    </div>
+                </div>
+
+                <div class="col-md-12">
                     <div class="form-group">
                         <label for="exampleInputEmail1"> Banner Url </label>
                         <input type="text" class="form-control" id="exampleInputEmail1" name="bannerUrl" >
@@ -1019,6 +1033,7 @@
             }
         }).then(function (response) {
 
+            $('#EditBannerCont input[name=name]').val(response.data.data.name);
             $('#EditBannerCont input[name=title]').val(response.data.data.title);
             $('#EditBannerCont input[name=bannerUrl]').val(response.data.data.url);
             $('#EditBannerCont textarea[name=description]').val(response.data.data.Description);

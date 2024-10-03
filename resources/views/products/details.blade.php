@@ -404,6 +404,22 @@
 
         </div>
 
+        <div class="form-group">
+            <label>Show News </label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="news" id="exampleNews1" value="1" @if($products->news == 1) checked @endif>
+                <label class="form-check-label" for="exampleNews1">
+                    Show
+                </label>
+                </div>
+                <div class="form-check">
+                <input class="form-check-input" type="radio" name="news" id="exampleNews2" value="0" @if($products->news == 0) checked @endif>
+                <label class="form-check-label" for="exampleNews2">
+                    Hide
+                </label>
+            </div>
+        </div>
+
         <button type="submit" class="btn btn-primary">Save </button>
     </form>
 </div>

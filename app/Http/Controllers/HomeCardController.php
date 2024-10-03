@@ -264,7 +264,7 @@ class HomeCardController extends Controller
             'title' => $request->title,
             'url' => $request->bannerUrl,
             'Description' => $request->description,
-           
+            'name' => $request->name,
             'destop' => $destopImage,
             'mobile' => $mobileImage
 
@@ -316,7 +316,7 @@ class HomeCardController extends Controller
             'title' => $request->title,
             'url' => $request->bannerUrl,
             'Description' => $request->description,
-           
+            'name' => $request->name,
             'destop' => $destopImage,
             'mobile' => $mobileImage
 

@@ -28,7 +28,7 @@ class HomepageCard extends Model
         'url3',
         'custom_name4',
         'url4',
-        
+        'name',
         'created_at',
         'updated_at',
         'deleted_at'

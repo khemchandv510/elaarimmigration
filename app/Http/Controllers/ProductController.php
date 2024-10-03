@@ -114,7 +114,8 @@ class ProductController extends Controller
              'pageCardDescription' => $request->pageCardDescription,
              'topices' => $request->topices,
              'navigation' => $request->navigation,
-             'inquiry' => $request->inquiry
+             'inquiry' => $request->inquiry,
+             'news' => $request->news
 
 
         ]);    
