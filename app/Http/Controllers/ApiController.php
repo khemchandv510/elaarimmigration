@@ -101,6 +101,15 @@ class ApiController extends Controller
         }else{
             $product->topices = true;
         }
+
+        if($product->news == 0){
+            $product->news = false; 
+        }else{
+            $product->news = true;
+        }
+
+        $product->category_name = @$product->mainCategory->name;
+        $product->category_image = @$product->mainCategory->image;
        
             $product->faqs = Faq::where('product_id', $product->id)->get();
             $product->PageContent = PageContent::where('product_id', $product->id)->get();

@@ -29,11 +29,22 @@ class Product extends Model
             'inquiry'
             
     ];
+
+
+public function mainCategory()
+{
+    return $this->belongsTo(Category::class, 'category_id');
 }
 
 
-// ALTER TABLE `products` ADD `PcardTitle` VARCHAR(255) NULL AFTER `keyword_title`, ADD `pageCardDescription` TEXT NULL AFTER `PcardTitle`;
+ public function SubCategories()
+{
+    return $this->belongsTo(SubCategory::class, 'sub_category_id');
+}
 
-// CREATE TABLE `elaar`.`page_card` ( `id` INT NOT NULL AUTO_INCREMENT , `keyword` VARCHAR(255) NULL , `url` VARCHAR(255) NULL , `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP , `updated_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP , `deleted_at` TIMESTAMP NULL DEFAULT NULL , PRIMARY KEY (`id`)) ENGINE = MyISAM;
-// ALTER TABLE `page_card` ADD `product_id` INT(11) NULL AFTER `id`;
-// 
+public function subSubCategories()
+{
+    return $this->belongsTo(SubSubCategory::class,  'sub_sub_category');
+}
+
+}
