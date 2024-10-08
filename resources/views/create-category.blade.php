@@ -107,6 +107,13 @@
                                 </div>
                             </div>
 
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Color code </label>
+                                    <input type="text" name="color" class="form-control" placeholder=" color code"   />
+                                </div>
+                            </div>
+
                             <!-- <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Select parent category*</label>

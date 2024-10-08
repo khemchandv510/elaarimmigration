@@ -42,7 +42,9 @@ class CategoryController extends Controller
                 // 'parent_id' => $request->parent_id,
                 'navi' => $request->navi,
                 'image' => isset($imageName) ? $imageName : null,
-                'position' => $request->position
+                'position' => $request->position,
+                'color' => $request->color
+
             ]);
 
             return redirect()->back()->with('success', 'Category has been created successfully.');
@@ -86,7 +88,8 @@ class CategoryController extends Controller
             'navi' => $request->navi,
             'image' => isset($imageName) ? $imageName : $catIdCheck->image,
             'position' => $request->position,
-            'slug' =>  $request->slug
+            'slug' =>  $request->slug,
+            'color' => $request->color
             
         ]);
 

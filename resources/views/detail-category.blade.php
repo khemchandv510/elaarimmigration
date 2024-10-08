@@ -70,6 +70,15 @@
 
                             
 
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Color code </label>
+                                    <input type="text" name="color" class="form-control" value="{{$categories->color}}" placeholder=" color code"   />
+                                </div>
+                            </div>
+
+
+
                         </div>
                     </div>
                     <div class="box-footer">
