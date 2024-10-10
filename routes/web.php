@@ -55,25 +55,25 @@ Route::middleware('auth')->group(function () {
 
     Route::get('smtp-config', [\App\Http\Controllers\SmtpController::class, 'index'])->name('smtp-config');
 
-    Route::post('send-mail-submit',[\App\Http\Controllers\SendMailController::class, 'store'])->name('send.php.mailer.submit');
+    Route::post('send-mail-submit', [\App\Http\Controllers\SendMailController::class, 'store'])->name('send.php.mailer.submit');
 
 
     Route::get("send-email", [\App\Http\Controllers\PHPMailerController::class, "email"])->name("send.email");
 
     Route::post("send-email", [\App\Http\Controllers\PHPMailerController::class, "composeEmail"])->name("send-test-email");
-    
-    
-    
+
+
+
     Route::get("send-emails", [\App\Http\Controllers\PHPMailerController::class, "showEmailFrom"])->name("send.showEmail");
-    
+
     Route::post("send-emails", [\App\Http\Controllers\PHPMailerController::class, "sendLiveEmail"])->name("send-live-email");
-    
-    
+
+
 
 
     Route::any('category', [CategoryController::class, 'createCategory'])->name('Category.show');
     Route::get('category/{id}', [CategoryController::class, 'viewCategory'])->name('category.detail');
-    
+
     Route::post('category/{id}', [CategoryController::class, 'updateCategory'])->name('category.update');
 
     Route::get('sub-category', [CategoryController::class, 'subCategory'])->name('Category.showSubCategory');
@@ -101,129 +101,129 @@ Route::middleware('auth')->group(function () {
     Route::post('save-faq', [FaqController::class, 'saveFaq'])->name('faq.save');
     Route::post('update-faq', [FaqController::class, 'updateFaqData'])->name('faq.update');
 
-    
+
     Route::post('keywords-update', [FaqController::class, 'KeywordsUpdate'])->name('keywords.update');
     Route::get('get-keyword-details/{id}', [FaqController::class, 'KeywordsDetails'])->name('keywords.details');
 
-    
+
     Route::get('get-custom-adds-details/{id}', [FaqController::class, 'customAddsDetails']);
     Route::post('custom-adds-update', [FaqController::class, 'customAddsUpdate'])->name('customadd.update');
 
-    
+
     Route::get('custom-adds-delete/{id}', [FaqController::class, 'customAddsDetete'])->name('customadds.delete');
 
-    
-    
+
+
     Route::post('save-page-content', [FaqController::class, 'savePageContent'])->name('pagecontent.save');
-    
+
     Route::post('edit-page-content', [FaqController::class, 'editPageContent'])->name('pagecontent.edit');
 
 
     Route::post('save-keywords', [FaqController::class, 'savekeywords'])->name('keywords.save');
     Route::post('custom-adds', [FaqController::class, 'saveCustomAdds'])->name('customadd.save');
-    
+
     Route::get('category-delete/{id}', [CategoryController::class, 'deleteCategory'])->name('category.delete');
-    
+
     Route::get('sub-category-delete/{id}', [CategoryController::class, 'deleteSubCategory'])->name('sub-category.delete');
-    
-    
+
+
     Route::get('sub-sub-category-delete/{id}', [CategoryController::class, 'deleteSubSubCategory'])->name('sub-sub-category.delete');
-    
-    
+
+
     Route::get('faq-delete/{id}', [FaqController::class, 'faqDelete'])->name('faq.delete');
-    
+
     Route::get('page-delete/{id}', [FaqController::class, 'pageDelete'])->name('page.delete');
-    
+
     Route::get('keyword-delete/{id}', [FaqController::class, 'keywordDelete'])->name('keyword.delete');
-    
+
     Route::get('custom-add-delete/{id}', [FaqController::class, 'customAddDelete'])->name('custom-add-delete');
-    
-    
+
+
     Route::get('get-faq/{id}', [FaqController::class, 'pageContentDetails'])->name('faq.details');
 
     Route::get('get-faq-details/{id}', [FaqController::class, 'FaqDetails'])->name('faqs.details');
 
-    
-    
+
+
     Route::get('blogs/', [BlogController::class, 'index'])->name('blog.index');
-    
+
     Route::get('blogs/add', [BlogController::class, 'create'])->name('blog.create');
     Route::post('blogs/add', [BlogController::class, 'storeBlog'])->name('blog.store');
-    
+
     Route::get('blogs/{id}', [BlogController::class, 'editBlog'])->name('blog.edit');
     Route::post('blogs/{id}', [BlogController::class, 'updateBlog'])->name('blog.update');
-    
-    
+
+
     Route::get('blogs/delete/{id}', [BlogController::class, 'deleteBlog'])->name('blog.delete');
 
 
 
     Route::get('news/', [BlogController::class, 'indexNews'])->name('news.index');
     Route::get('news/add', [BlogController::class, 'createNews'])->name('news.create');
-     Route::post('news/add', [BlogController::class, 'storeNews'])->name('news.store');
-    
+    Route::post('news/add', [BlogController::class, 'storeNews'])->name('news.store');
+
     Route::get('news/{id}', [BlogController::class, 'editNews'])->name('news.edit');
     Route::post('news/{id}', [BlogController::class, 'updateNews'])->name('news.update');
-    
-    
+
+
     Route::get('news/delete/{id}', [BlogController::class, 'deleteNews'])->name('news.delete');
-    
-    
-    
+
+
+
     // clients routes
-    
+
     Route::get('clients/', [BlogController::class, 'clientsData'])->name('clients.index');
     Route::get('clients/add', [BlogController::class, 'createCleint'])->name('clients.create');
-     Route::post('clients/add', [BlogController::class, 'storeCleint'])->name('clients.store');
-    
+    Route::post('clients/add', [BlogController::class, 'storeCleint'])->name('clients.store');
+
     Route::get('clients/{id}', [BlogController::class, 'editClient'])->name('clients.edit');
     Route::post('clients/{id}', [BlogController::class, 'updateClient'])->name('clients.update');
-    
-    
+
+
     Route::get('clients/delete/{id}', [BlogController::class, 'deleteClient'])->name('clients.delete');
 
 
-        // card routes
-    Route::group(['prefix'=>'home-page-card' ], function(){
-        Route::get('/', [HomeCardController::class , 'index' ])->name('card.index');
-        Route::get('add', [HomeCardController::class , 'add' ])->name('card.add');
-         Route::get('edit/{id}', [HomeCardController::class , 'edit' ])->name('card.edit');
-         
-         Route::post('add', [HomeCardController::class , 'store' ])->name('card.store');
-         Route::post('edit/{id}', [HomeCardController::class , 'update' ])->name('card.update');
-         
-         Route::get('delete/{id}', [HomeCardController::class , 'delete' ])->name('card.delete');
+    // card routes
+    Route::group(['prefix' => 'home-page-card'], function () {
+        Route::get('/', [HomeCardController::class, 'index'])->name('card.index');
+        Route::get('add', [HomeCardController::class, 'add'])->name('card.add');
+        Route::get('edit/{id}', [HomeCardController::class, 'edit'])->name('card.edit');
+
+        Route::post('add', [HomeCardController::class, 'store'])->name('card.store');
+        Route::post('edit/{id}', [HomeCardController::class, 'update'])->name('card.update');
+
+        Route::get('delete/{id}', [HomeCardController::class, 'delete'])->name('card.delete');
     });
 
-    Route::get('/home-page', [HomeCardController::class , 'homePage' ])->name('card.homepage');
-    Route::post('/home-page', [HomeCardController::class , 'updateHomePage' ])->name('home.update');
+    Route::get('/home-page', [HomeCardController::class, 'homePage'])->name('card.homepage');
+    Route::post('/home-page', [HomeCardController::class, 'updateHomePage'])->name('home.update');
 
-    Route::get('/pages', [HomeCardController::class , 'pages' ])->name('home.pages');
+    Route::get('/pages', [HomeCardController::class, 'pages'])->name('home.pages');
 
-    Route::get('/pages/create', [HomeCardController::class , 'CreatePage' ])->name('home.create');
-    Route::post('/pages/create', [HomeCardController::class , 'CreatePageDynamic' ]);
-    Route::get('/pages/{id}', [HomeCardController::class , 'PageEdit' ])->name('home.edit');
+    Route::get('/pages/create', [HomeCardController::class, 'CreatePage'])->name('home.create');
+    Route::post('/pages/create', [HomeCardController::class, 'CreatePageDynamic']);
+    Route::get('/pages/{id}', [HomeCardController::class, 'PageEdit'])->name('home.edit');
 
-    
-    Route::post('/banners/add', [HomeCardController::class , 'AddBanner' ])->name('Banners.add');
-    Route::get('/get-banner-details/{id}', [HomeCardController::class , 'BannerDetails' ]);
 
-    Route::post('/banners/update', [HomeCardController::class , 'BannerUpdate' ])->name('Banners.update');
-    Route::get('/get-banner-delete/{id}', [HomeCardController::class , 'DeleteBanner' ])->name('Banners.delete');
+    Route::post('/banners/add', [HomeCardController::class, 'AddBanner'])->name('Banners.add');
+    Route::get('/get-banner-details/{id}', [HomeCardController::class, 'BannerDetails']);
 
-    Route::get('/media', [SmtpController::class , 'showMedia' ])->name('media.show');
+    Route::post('/banners/update', [HomeCardController::class, 'BannerUpdate'])->name('Banners.update');
+    Route::get('/get-banner-delete/{id}', [HomeCardController::class, 'DeleteBanner'])->name('Banners.delete');
 
-    Route::post('/media', [SmtpController::class , 'SaveMedia' ]);    
+    Route::get('/media', [SmtpController::class, 'showMedia'])->name('media.show');
 
-    
+    Route::post('/media', [SmtpController::class, 'SaveMedia']);
+
+
     Route::get('sub-sub-category/{id}', [CategoryController::class, 'SubSubcategoryDetails'])->name('subsubcategory.detail');
     Route::post('sub-sub-category/{id}', [CategoryController::class, 'SubSubcategoryUpdate'])->name('subsubcategory.detail');
 
 
-    Route::get('/pages-delete/{id}', [HomeCardController::class , 'pagesDelete' ])->name('home.pagesDelete');
-    Route::get('/Company', [ProfileController::class , 'company' ])->name('home.company');
+    Route::get('/pages-delete/{id}', [HomeCardController::class, 'pagesDelete'])->name('home.pagesDelete');
+    Route::get('/Company', [ProfileController::class, 'company'])->name('home.company');
 
-    Route::post('/Company', [ProfileController::class , 'companyUpdate' ]);
+    Route::post('/Company', [ProfileController::class, 'companyUpdate']);
 
 
     Route::post('save-page-card', [FaqController::class, 'savepageCard'])->name('save.pageCard');
@@ -233,8 +233,15 @@ Route::middleware('auth')->group(function () {
     Route::get('delete-page-image/{id}', [FaqController::class, 'deletePageImage'])->name('delete.pageImage');;
 
 
+
+    Route::get('author', [FaqController::class, 'showAllauthor'])->name('author.show');
+    Route::get('author/create', [FaqController::class, 'createauthor'])->name('author.create');
+    Route::post('author/create', [FaqController::class, 'insertAuthor']);
+
+
+
     // 
 
 
-    
+
 });

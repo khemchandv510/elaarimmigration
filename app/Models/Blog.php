@@ -28,16 +28,21 @@ class Blog extends Model
         'created_at',
         'updated_at',
         'deleted_at',
-        'metatag', 'metadescription' ,  'metakeywords', 'seourl' , 'scripthead'  , 'scriptBody'
+        'metatag',
+        'metadescription',
+        'metakeywords',
+        'seourl',
+        'scripthead',
+        'scriptBody'
     ];
 
-     public function mainCategory()
+    public function mainCategory()
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
-    
-    
-     public function SubCategories()
+
+
+    public function SubCategories()
     {
         return $this->belongsTo(SubCategory::class, 'sub_category_id');
     }
@@ -46,7 +51,4 @@ class Blog extends Model
     {
         return $this->belongsTo(SubSubCategory::class,  'sub_sub_category');
     }
-
-    
-
 }

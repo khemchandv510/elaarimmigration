@@ -8,10 +8,13 @@ use App\Models\PageContent;
 use App\Models\Keyword;
 use App\Models\CustomAdd;
 use App\Models\Pagecard;
+use App\Models\Author;
+
 
 class FaqController extends Controller
 {
-    public function  saveFaq(Request $request){
+    public function  saveFaq(Request $request)
+    {
 
         $validator = $request->validate([
             // 'product_id'      => 'required|numeric',
@@ -22,25 +25,25 @@ class FaqController extends Controller
         $faq = Faq::create([
             'name' => $request->faqtitle,
             'description' => $request->addfooterdescription,
-            'product_id' => isset($request->product_id) ? $request->product_id : null ,
+            'product_id' => isset($request->product_id) ? $request->product_id : null,
             'page_id' => isset($request->page_id) ? $request->page_id : null
-         ]);
+        ]);
 
         return back()->with('success', 'Faq has been created successfully.');
     }
 
-    public function  savePageContent(Request $request) {
+    public function  savePageContent(Request $request)
+    {
         $validator = $request->validate([
             'pageImage'      => 'image|mimes:jpeg,png,jpg,webp|max:1024',
             // 'videoLink'      => 'required',
             // 'product_id'      => 'required|numeric',
         ]);
 
-        if($request->file('pageImage')){
+        if ($request->file('pageImage')) {
 
-            $imageName = time().'.'.$request->pageImage->getClientOriginalExtension();
+            $imageName = time() . '.' . $request->pageImage->getClientOriginalExtension();
             $request->pageImage->move(public_path('images'), $imageName);
-
         }
 
         PageContent::create([
@@ -53,10 +56,10 @@ class FaqController extends Controller
         ]);
 
         return back()->with('success', 'Page content has been created successfully.');
-
     }
 
-    public function savekeywords(Request $request){
+    public function savekeywords(Request $request)
+    {
         $validator = $request->validate([
             // 'product_id'      => 'required|numeric',
             'keywordName'      => 'required',
@@ -74,7 +77,8 @@ class FaqController extends Controller
         return back()->with('success', 'Keywords has been created successfully.');
     }
 
-    public function savepageCard(Request $request){
+    public function savepageCard(Request $request)
+    {
         $faq = Pagecard::create([
             'product_id' => $request->product_id,
             'keyword' => $request->keywordName,
@@ -82,11 +86,11 @@ class FaqController extends Controller
 
         ]);
         return back()->with('success', 'Page card has been created successfully.');
-        
     }
 
-    
-    public function UpdatePageCard(Request $request){
+
+    public function UpdatePageCard(Request $request)
+    {
         $faq = Pagecard::where('id', $request->editPagecardId)->update([
             'keyword' => $request->keywordName,
             'url' => $request->keywordUrl,
@@ -95,28 +99,32 @@ class FaqController extends Controller
         return back()->with('success', 'Page card has been updated successfully.');
     }
 
-    
-    public function deleteSavepageCard($id){
+
+    public function deleteSavepageCard($id)
+    {
         $faq = Pagecard::where('id', $id)->delete();
 
         return back()->with('success', 'Page card has been updated successfully.');
     }
 
-    
-    public function getSavepageCard($id){
+
+    public function getSavepageCard($id)
+    {
         $faq = Pagecard::find($id);
         return response()->json(['status' => true,  'data' => $faq]);
     }
 
 
-    public function FaqDetails($id){
-       $faqs =  Faq::where('id', $id)->first();
-       return response()->json(['status' => true,  'data' => $faqs]);
+    public function FaqDetails($id)
+    {
+        $faqs =  Faq::where('id', $id)->first();
+        return response()->json(['status' => true,  'data' => $faqs]);
     }
 
 
-    
-    public function saveCustomAdds(Request $request){
+
+    public function saveCustomAdds(Request $request)
+    {
         $validator = $request->validate([
             // 'product_id'      => 'required|numeric',
             'addsName'      => 'required',
@@ -126,16 +134,15 @@ class FaqController extends Controller
         ]);
 
 
-        if($request->file('pageImage')){
+        if ($request->file('pageImage')) {
 
-            $imageName = time().'.'.$request->pageImage->getClientOriginalExtension();
+            $imageName = time() . '.' . $request->pageImage->getClientOriginalExtension();
             $request->pageImage->move(public_path('images'), $imageName);
-
         }
 
-        
-         CustomAdd::create([
-            
+
+        CustomAdd::create([
+
             'image' => isset($imageName) ? $imageName : null,
             'add_name' => $request->addsName,
             'add_url' => $request->addUrl,
@@ -145,39 +152,42 @@ class FaqController extends Controller
 
         return back()->with('success', 'custom adds has been created successfully.');
     }
-    
-    public function faqDelete(Request $request, $id){
+
+    public function faqDelete(Request $request, $id)
+    {
         Faq::where('id', $id)->delete();
         return back()->with('success', 'faq has been deleted successfully.');
-        
     }
-    
-    public function pageDelete(Request $request, $id){
+
+    public function pageDelete(Request $request, $id)
+    {
         PageContent::where('id', $id)->delete();
         return back()->with('success', 'faq has been deleted successfully.');
-        
     }
-    
-    
-    public function keywordDelete(Request $request, $id){
+
+
+    public function keywordDelete(Request $request, $id)
+    {
         Keyword::where('id', $id)->delete();
         return back()->with('success', 'Keyword has been deleted successfully.');
-        
     }
-    
-    public function customAddDelete(Request $request, $id){
+
+    public function customAddDelete(Request $request, $id)
+    {
         CustomAdd::where('id', $id)->delete();
         return back()->with('success', 'Keyword has been deleted successfully.');
     }
-    
-    public function pageContentDetails(Request $request, $id){
-      $faq =   PageContent::where('id', $id)->first();
-         return  response()->json(['status' => true, 'data' => $faq]);
+
+    public function pageContentDetails(Request $request, $id)
+    {
+        $faq =   PageContent::where('id', $id)->first();
+        return  response()->json(['status' => true, 'data' => $faq]);
     }
-    
-    
-    
-    public function  editPageContent(Request $request) {
+
+
+
+    public function  editPageContent(Request $request)
+    {
         $validator = $request->validate([
             'pageImage'      => 'image|mimes:jpeg,png,jpg,webp|max:1024',
             // 'videoLink'      => 'required',
@@ -185,11 +195,10 @@ class FaqController extends Controller
             'pagecontent_id' =>  'required|numeric'
         ]);
 
-        if($request->file('pageImage')){
+        if ($request->file('pageImage')) {
 
-            $imageName = time().'.'.$request->pageImage->getClientOriginalExtension();
+            $imageName = time() . '.' . $request->pageImage->getClientOriginalExtension();
             $request->pageImage->move(public_path('images'), $imageName);
-
         }
         $PageContent = PageContent::find($request->pagecontent_id);
 
@@ -202,64 +211,105 @@ class FaqController extends Controller
         ]);
 
         return back()->with('success', 'Page content has been created successfully.');
-
     }
 
-    public function updateFaqData(Request $request){
+    public function updateFaqData(Request $request)
+    {
         Faq::where('id', $request->faqedit_id)->update(['name' => $request->faqtitle, 'description' => $request->footerdescription]);
         return back();
     }
-    
 
-    public function KeywordsUpdate(Request $request){
 
-        Keyword::where('id', $request->keyword_id)->update(['name' => $request->keywordName, 'link' => $request->keywordUrl ]);
+    public function KeywordsUpdate(Request $request)
+    {
+
+        Keyword::where('id', $request->keyword_id)->update(['name' => $request->keywordName, 'link' => $request->keywordUrl]);
         return back();
+    }
 
-    }   
-
-    public function KeywordsDetails($id){
-       $faq =  Keyword::find($id);
+    public function KeywordsDetails($id)
+    {
+        $faq =  Keyword::find($id);
         return  response()->json(['status' => true, 'data' => $faq]);
-
     }
 
-    public function customAddsDetails($id){
+    public function customAddsDetails($id)
+    {
         $CustomAdd  = CustomAdd::find($id);
-        return response()->json(['status' => true, 'data' => $CustomAdd]); 
+        return response()->json(['status' => true, 'data' => $CustomAdd]);
     }
 
-    
-    public function customAddsDetete($id){
+
+    public function customAddsDetete($id)
+    {
         $CustomAdd  = CustomAdd::find($id)->delete();
         return back();
         // return response()->json(['status' => true, 'data' => $CustomAdd]); 
     }
 
-    public function customAddsUpdate(Request $request){
+    public function customAddsUpdate(Request $request)
+    {
 
         $customadd = CustomAdd::find($request->customEditId);
         $imageName = $customadd->image;
-        if($request->file('pageImage')){
+        if ($request->file('pageImage')) {
 
-            $imageName = time().'.'.$request->pageImage->getClientOriginalExtension();
+            $imageName = time() . '.' . $request->pageImage->getClientOriginalExtension();
             $request->pageImage->move(public_path('images'), $imageName);
-
         }
 
 
-        CustomAdd::where('id', $request->customEditId)->update(['add_name' => $request->addsName , 'add_url' => $request->addUrl,  'image' => $imageName]);
+        CustomAdd::where('id', $request->customEditId)->update(['add_name' => $request->addsName, 'add_url' => $request->addUrl,  'image' => $imageName]);
 
         return back();
     }
 
-    public function deletePageImage($id){
+    public function deletePageImage($id)
+    {
         PageContent::where('id', $id)->update([
-           
+
             'image' => null,
         ]);
 
         return back()->with('success', 'Page content has been created successfully.');
     }
-    
+
+    // author methods
+
+    public function showAllauthor()
+    {
+        $author = Author::all();
+
+        return view('author.index', compact('author'));
+    }
+
+    public function createauthor(Request $request)
+    {
+
+        return view('author.create');
+    }
+
+    public function insertAuthor(Request $request)
+    {
+
+
+        $validator = $request->validate([
+            'image'      => 'image|mimes:jpeg,png,jpg,webp|max:1024',
+
+        ]);
+
+        if ($request->file('image')) {
+
+            $imageName = time() . '.' . $request->image->getClientOriginalExtension();
+            $request->image->move(public_path('images'), $imageName);
+        }
+
+        Author::create([
+            'name' => $request->authorName,
+            'desc' => $request->footerdescription,
+            'image' => isset($imageName) ? $imageName : null,
+        ]);
+
+        return back()->with('success', 'author has been created successfully.');
+    }
 }
