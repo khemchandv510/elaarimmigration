@@ -9,6 +9,9 @@ use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\SubSubCategory;
 use App\Models\Client;
+use App\Models\Author;
+use App\Models\CustomAdd;
+use App\Models\PageContent;
 
 class BlogController extends Controller
 {
@@ -114,20 +117,31 @@ class BlogController extends Controller
 
 
     public function createNews(Request $request){
-        $category =  Category::where('parent_id', null)->orderby('id', 'desc')->get();
 
-        return view('news.create', compact('category'));
+        $author = Author::all();
+        $category =  Category::where('parent_id', null)->orderby('id', 'desc')->get();
+        $subCategory =  SubCategory::get();
+        $subSubCategory =  SubSubCategory::get();
+
+        $allItems = new \Illuminate\Database\Eloquent\Collection; 
+        $allItems = $allItems->concat($category);
+        $allItems = $allItems->concat($subCategory);
+        $allItems = $allItems->concat($subSubCategory);
+
+      
+        return view('news.create', compact('allItems', 'author'));
     }
     
     public function storeNews(Request $request){
         $validator = $request->validate([
             'pageName'      => 'required',
-            'category'      => 'required|numeric',
+            // 'category'      => 'required',
             // 'subcategory' => 'required|numeric',
             'image' => 'image|mimes:jpeg,png,jpg,webp|max:1024',
         ]);
 
 
+        // dd($request);
             $imageName  = null;
             if($request->file('image')){
 
@@ -136,7 +150,7 @@ class BlogController extends Controller
 
             }
             
-        News::create(['title' => $request->pageName, 'category_id' => $request->category, 'sub_category_id' => $request->subcategory, 'sub_sub_category' => $request->subSubcategory, 'auther_name' => $request->authorName, 'slug' => $request->slug, 'content' => $request->footerdescription, 'image' => $imageName, 'metatag' => $request->metatag, 'metadescription' => $request->metadescription, 'metakeywords' => $request->metakeywords, 'seourl' => $request->seourl, 'scripthead' => $request->scripthead, 'scriptBody' => $request->scriptBody ]);
+        News::create(['title' => $request->pageName, 'category_id' => json_encode($request->category), 'sub_category_id' => $request->subcategory, 'sub_sub_category' => $request->subSubcategory, 'auther_name' => $request->authorName, 'slug' => $request->slug, 'content' => $request->footerdescription, 'image' => $imageName, 'metatag' => $request->metatag, 'metadescription' => $request->metadescription, 'metakeywords' => $request->metakeywords, 'seourl' => $request->seourl, 'scripthead' => $request->scripthead, 'scriptBody' => $request->scriptBody, 'publish_date' => $request->date ]);
         
         
         return redirect()->route('news.index');
@@ -145,14 +159,21 @@ class BlogController extends Controller
      
     
     public function editNews(Request $request, $id){
-        $category =  Category::where('parent_id', null)->orderby('id', 'desc')->get();
         
         $blog = News::find($id);
-        $subCategory =  SubCategory::where('category_id', $blog->category_id)->get();
-        
-        $subSubCategory =  SubSubCategory::where('sub_category_id', $blog->sub_category_id)->get();
 
-        return view('news.edit', compact('category', 'blog', 'subCategory', 'subSubCategory' ));
+        $category =  Category::where('parent_id', null)->orderby('id', 'desc')->get();
+        $subCategory =  SubCategory::get();
+        $subSubCategory =  SubSubCategory::get();
+
+        $allItems = new \Illuminate\Database\Eloquent\Collection; 
+        $allItems = $allItems->concat($category);
+        $allItems = $allItems->concat($subCategory);
+        $allItems = $allItems->concat($subSubCategory);
+
+        $pageContent = PageContent::where('news_id', $id)->get();
+        $CustomAdd= CustomAdd::where('news_id', $id)->get();
+        return view('news.edit', compact('category', 'blog', 'allItems', 'pageContent', 'CustomAdd' ));
     }
     
      
@@ -161,7 +182,7 @@ class BlogController extends Controller
         
         $validator = $request->validate([
             'pageName'      => 'required',
-            'category'      => 'required|numeric',
+            'category'      => 'required',
             'blog_id' => 'required|numeric',
             'image' => 'image|mimes:jpeg,png,jpg,webp|max:1024',
         ]);
@@ -180,7 +201,7 @@ class BlogController extends Controller
             }
             
             
-        News::where(['id' => $id ])->update(['title' => $request->pageName, 'category_id' => $request->category, 'sub_category_id' => $request->subcategory, 'sub_sub_category' => $request->subSubcategory, 'auther_name' => $request->authorName, 'slug' => $request->slug, 'content' => $request->footerdescription, 'image' => $imageName , 'metatag' => $request->metatag, 'metadescription' => $request->metadescription, 'metakeywords' => $request->metakeywords, 'seourl' => $request->seourl, 'scripthead' => $request->scripthead, 'scriptBody' => $request->scriptBody ]);
+        News::where(['id' => $id ])->update(['title' => $request->pageName, 'category_id' => $request->category, 'sub_category_id' => $request->subcategory, 'sub_sub_category' => $request->subSubcategory, 'auther_name' => $request->authorName, 'slug' => $request->slug, 'content' => $request->footerdescription, 'image' => $imageName , 'metatag' => $request->metatag, 'metadescription' => $request->metadescription, 'metakeywords' => $request->metakeywords, 'seourl' => $request->seourl, 'scripthead' => $request->scripthead, 'scriptBody' => $request->scriptBody , 'publish_date' => $request->date]);
         
         
         return back();

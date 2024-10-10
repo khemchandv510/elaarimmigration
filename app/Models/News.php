@@ -26,7 +26,7 @@ class News extends Model
         'created_at',
         'updated_at',
         'deleted_at',
-        'metatag', 'metadescription' ,  'metakeywords', 'seourl' , 'scripthead'  , 'scriptBody'
+        'metatag', 'metadescription' ,  'metakeywords', 'seourl' , 'scripthead'  , 'scriptBody', 'publish_date'
     ];
 
      public function mainCategory()

@@ -53,6 +53,8 @@ class FaqController extends Controller
             'page_id' => $request->page_id,
             'description' => $request->description,
             'image' => isset($imageName) ? $imageName : null,
+            'news_id' => $request->news_id
+
         ]);
 
         return back()->with('success', 'Page content has been created successfully.');
@@ -147,7 +149,10 @@ class FaqController extends Controller
             'add_name' => $request->addsName,
             'add_url' => $request->addUrl,
             'product_id' => $request->product_id,
-            'page_id' => $request->page_id
+            'page_id' => $request->page_id,
+            'news_id' => $request->news_id
+
+            
         ]);
 
         return back()->with('success', 'custom adds has been created successfully.');
@@ -280,6 +285,7 @@ class FaqController extends Controller
     {
         $author = Author::all();
 
+        // dd($author);
         return view('author.index', compact('author'));
     }
 

@@ -20,53 +20,51 @@
             </div>
 
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="form-group">
-                        <label for="exampleFormControlInput1">Category</label>
-                        <select type="text" name="category" class="form-control" onchange="getsubcategroy(this.value)" required>
+                        <label for="exampleFormControlInput1">Add Category</label>
+                        <select  name="category[]" class="form-control js-example-basic-multiple" multiple="multiple" required>
                             <option value="">None</option>
-                            @foreach($category as $categories)
-                            <option value="{{$categories->id}}">{{$categories->name}}</option>
+                            @foreach($allItems as $categories)
+                            <option value="{{$categories->name}}">{{$categories->name}}</option>
                             @endforeach
                         </select>
                     </div>
                 </div>
 
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Sub category</label>
-                        <select type="text" id="subcategory" name="subcategory" class="form-control"  onchange="getsubsubcategroy(this.value)">
-                            <option value="">None</option>
-                        </select>
-                    </div>
-                </div>
                 
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Sub Sub category</label>
-                        <select type="text" id="subSubcategory" name="subSubcategory" class="form-control" >
-                            <option value="">None</option>
-                        </select>
-                    </div>
-                </div>
 
-                
-                <div class="form-group">
-                <label for="exampleFormControlInput1">Choose image</label>
-                <input type="file" class="form-control" id="exampleFormControlInput1"  name="image" >
+                <div class="col-md-6">
+                    <div class="form-group">
+                    <label for="exampleFormControlInput1">Choose image</label>
+                    <input type="file" class="form-control" id="exampleFormControlInput1"  name="image" >
+                </div>
             </div>
 
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Author Name</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1"  name="authorName" placeholder="name">
+                    
+                    <select name="authorName" id="" class="form-control" required>
+                        <option value="">Select</option> 
+                        @foreach($author as $categories)
+                            <option value="{{$categories->name}}">{{$categories->name}}</option>
+                            @endforeach
+                    </select>
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Slug</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1"  name="slug" placeholder="name">
+                    <input type="text" class="form-control" id="exampleFormControlInput1"  name="slug" placeholder="slug">
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Published Date</label>
+                    <input type="date" class="form-control" id="exampleFormControlInput1"  name="date" placeholder="name">
                 </div>
             </div>
 
@@ -128,7 +126,7 @@
     </form>
 </div>
 
-   
+
 <script>
    CKEDITOR.replaceAll('editor1'); 
 </script>
@@ -159,30 +157,34 @@
         });            
     }
 
-    function getsubsubcategroy(id){
-        let catid = document.getElementById("subcategory").value;
-        console.log(catid);
+    $(document).ready(function() {
+        $('.js-example-basic-multiple').select2();
+    });
+
+    // function getsubsubcategroy(id){/
+    //     let catid = document.getElementById("subcategory").value;
+    //     console.log(catid);
         
-        axios({
-            method: 'get',
-            url: "{{ env('APP_URL') }}/api/sub-sub-category/"+id,
-            data: {
-                id: id
+    //     axios({
+    //         method: 'get',
+    //         url: "{{ env('APP_URL') }}/api/sub-sub-category/"+id,
+    //         data: {
+    //             id: id
                 
-            }
-        }).then(function (response) {
-            console.log(response.data.data);
+    //         }
+    //     }).then(function (response) {
+    //         console.log(response.data.data);
 
-            var html=''
-               html = '<option value=""> None </option>'
-               response.data.data.forEach(category => {
-                    html += ` <option value="${category.id}"> ${category.name } </option>`
-               });
+    //         var html=''
+    //            html = '<option value=""> None </option>'
+    //            response.data.data.forEach(category => {
+    //                 html += ` <option value="${category.id}"> ${category.name } </option>`
+    //            });
 
-               document.getElementById('subSubcategory').innerHTML = html;
+    //            document.getElementById('subSubcategory').innerHTML = html;
               
-        });
-    }
+    //     });
+    // }
 
 </script>
 @endsection

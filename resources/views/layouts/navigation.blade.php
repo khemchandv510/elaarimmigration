@@ -70,6 +70,15 @@
             {{ __('News') }}
         </a>
     </li> 
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('author.show') }}">
+            <svg class="nav-icon">
+                <use xlink:href="{{ asset('icons/coreui.svg#cil-user') }}"></use>
+            </svg>
+            {{ __('Author') }}
+        </a>
+    </li> 
     
 
     <li class="nav-item">

@@ -11,7 +11,6 @@
                 <tr>
                 <th scope="col">id</th>
                 <th scope="col">Title</th>
-                <th scope="col">Category name</th>
                 <th scope="col">Author name</th>
                 <th scope="col">Action</th>
                 </tr>
@@ -25,9 +24,7 @@
                            @php $count++; @endphp
                         <tr>
                             <th scope="row">{{$count }}</th>
-                            <td>{{$category->title }}</td>
-                             <td>{{@$category->mainCategory->name }}</td>
-                            
+                            <td>{{$category->title }}</td>                            
                             <td> @if($category->image)
                                 <img src="{{ asset('/public/images') }}/{{$category->image}}" width="100px">
                                 @endif

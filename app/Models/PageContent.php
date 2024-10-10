@@ -19,7 +19,8 @@ class PageContent extends Model
         'product_id',
         'page_id',
         'created_at',
-        'product_title'
+        'product_title',
+        'news_id'
 
     ];
 

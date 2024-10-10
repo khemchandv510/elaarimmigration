@@ -12,7 +12,6 @@
                         <th scope="col">id</th>
                         <th scope="col">Name</th>
                         <th scope="col">Image </th>
-                        <th scope="col">Description </th>
                         <th scope="col"> Action </th>
                     </tr>
                 </thead>
@@ -25,16 +24,14 @@
                     @php $count++; @endphp
                     <tr>
                         <th scope="row">{{$count }}</th>
-                        <td>{{$category->title }}</td>
-                        <td>{{@$category->mainCategory->name }}</td>
-
+                        <td>{{$category->name }}</td>
                         <td> @if($category->image)
                             <img src="{{ asset('/public/images') }}/{{$category->image}}" width="100px">
                             @endif
                         </td>
-                        <td><a href="{{route('news.edit', $category->id)}}"><i class="fa fa-edit" aria-hidden="true"></i></a>
 
-                            <a href="{{route('news.delete', $category->id )}}"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
+                        <td>    
+                            <a href="#"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
                         </td>
                     </tr>
                     @endforeach
