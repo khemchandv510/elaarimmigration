@@ -173,7 +173,9 @@ class BlogController extends Controller
 
         $pageContent = PageContent::where('news_id', $id)->get();
         $CustomAdd= CustomAdd::where('news_id', $id)->get();
-        return view('news.edit', compact('category', 'blog', 'allItems', 'pageContent', 'CustomAdd' ));
+        $author = Author::all();
+
+        return view('news.edit', compact('category', 'blog', 'allItems', 'pageContent', 'CustomAdd', 'author' ));
     }
     
      

@@ -23,7 +23,7 @@
             <div class="col-md-6">
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Add Category</label>
-                        <select  name="category[]" class="form-control js-example-basic-multiple" multiple="multiple" required>
+                        <select id="mySelect2" name="category[]" class="form-control js-example-basic-multiple preselect-dropdown" multiple="multiple" required>
                             <option value="">None</option>
                             @foreach($allItems as $categories)
                             <option value="{{$categories->name}}">{{$categories->name}}</option>
@@ -47,9 +47,19 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Author Name</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1"  name="authorName" placeholder="name" value="{{$blog->auther_name}}">
+                    <!-- <input type="text" class="form-control" id="exampleFormControlInput1"  name="authorName" placeholder="name" value="{{$blog->auther_name}}"> -->
+
+
+                    <select name="authorName" id="" class="form-control" required>
+                        <option value="">Select</option> 
+                        @foreach($author as $categories)
+                            <option value="{{$categories->name}}" {{ $categories->name == $blog->auther_name ? 'selected' : '' }}>{{$categories->name}}</option>
+                            @endforeach
+                    </select>
+
                 </div>
             </div>
+            
 
             <div class="col-md-6">
                 <div class="form-group">
@@ -447,10 +457,13 @@
    CKEDITOR.replaceAll('editor1'); 
 </script>
 
-
 <script>
       $(document).ready(function() {
         $('.js-example-basic-multiple').select2();
+        
+    var preselectedValues =  <?php echo $blog->category_id ?>;
+    $(".js-example-basic-multiple").val(preselectedValues).trigger("change");
+
     });
 
    
@@ -500,5 +513,6 @@
 
         });
     }
+
 </script>
 @endsection
