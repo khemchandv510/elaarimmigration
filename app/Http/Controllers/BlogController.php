@@ -102,10 +102,10 @@ class BlogController extends Controller
 
             }
             
-        Blog::create(['title' => $request->pageName, 'category_id' => $request->category, 'sub_category_id' => $request->subcategory, 'sub_sub_category' => $request->subSubcategory, 'auther_name' => $request->authorName, 'slug' => $request->slug, 'content' => $request->footerdescription, 'image' => $imageName, 'metatag' => $request->metatag, 'metadescription' => $request->metadescription, 'metakeywords' => $request->metakeywords, 'seourl' => $request->seourl, 'scripthead' => $request->scripthead, 'scriptBody' => $request->scriptBody ]);
+        $blog = Blog::create(['title' => $request->pageName, 'category_id' => $request->category, 'sub_category_id' => $request->subcategory, 'sub_sub_category' => $request->subSubcategory, 'auther_name' => $request->authorName, 'slug' => $request->slug, 'content' => $request->footerdescription, 'image' => $imageName, 'metatag' => $request->metatag, 'metadescription' => $request->metadescription, 'metakeywords' => $request->metakeywords, 'seourl' => $request->seourl, 'scripthead' => $request->scripthead, 'scriptBody' => $request->scriptBody ]);
         
         
-        return redirect()->route('blog.index');
+        return redirect()->route('blog.edit', [$blog->id]);
  
         
     }
