@@ -31,6 +31,7 @@ Route::get('sub-sub-category/{id}', [ApiController::class, 'subSubCategories']);
 
 Route::get('blogs', [ApiController::class, 'allBlogs']);
 Route::get('news', [ApiController::class, 'allNews']);
+Route::get('news-cat-wise/{id}', [ApiController::class, 'NewsCategorywise']);
 
 Route::get('blogs/{id}', [ApiController::class, 'BlogDetails']);
 Route::get('news/{id}', [ApiController::class, 'NewsDetails']);

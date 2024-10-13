@@ -174,23 +174,39 @@ class ApiController extends Controller
 
     public function allNews(){
         $product = News::all();
-        
          $product->map(function ($item) {
-            $item->category_id = $item->mainCategory->name;
+            // dd( $item);
+            $names  = json_decode( $item->category_id);
+            // dd($names);
+            $item->category_id = Category::where('name', $names)->get();
             return $item;
-        });
-       
+        });   
+         
+        return response()->json(['status' => true, 'message' => 'all news','data' => $product], 200);
+    }
+
+    public function NewsCategorywise($category){
+        $product = News::whereJsonContains('category_id', $category )->get();
+        //  $product->map(function ($item) {
+        //     // dd( $item);
+        //     $names  = json_decode($item->category_id);
+        //     // dd($names);
+        //     $item->category_id = Category::where('name', $names)->get();
+        //     return $item;
+        // });   
          
         return response()->json(['status' => true, 'message' => 'all news','data' => $product], 200);
     }
 
     
     public function NewsDetails($id){
-        $product = News::find($id);
+
+        // dd($id);
+        $product = News::where('seourl', $id)->first();
         if(empty($product)){
             return response()->json(['status' => false, 'message' => 'Not foune news','data' => null], 200);
         }
-        $product->category_id = $product->mainCategory->name;         
+        // $product->category_id = $product->mainCategory->name;         
         return response()->json(['status' => true, 'message' => 'all news','data' => $product], 200);
     }
     
