@@ -150,10 +150,10 @@ class BlogController extends Controller
 
             }
             
-        News::create(['title' => $request->pageName, 'category_id' => json_encode($request->category), 'sub_category_id' => $request->subcategory, 'sub_sub_category' => $request->subSubcategory, 'auther_name' => $request->authorName, 'slug' => $request->slug, 'content' => $request->footerdescription, 'image' => $imageName, 'metatag' => $request->metatag, 'metadescription' => $request->metadescription, 'metakeywords' => $request->metakeywords, 'seourl' => $request->seourl, 'scripthead' => $request->scripthead, 'scriptBody' => $request->scriptBody, 'publish_date' => $request->date ]);
+       $news =  News::create(['title' => $request->pageName, 'category_id' => json_encode($request->category), 'sub_category_id' => $request->subcategory, 'sub_sub_category' => $request->subSubcategory, 'auther_name' => $request->authorName, 'slug' => $request->slug, 'content' => $request->footerdescription, 'image' => $imageName, 'metatag' => $request->metatag, 'metadescription' => $request->metadescription, 'metakeywords' => $request->metakeywords, 'seourl' => $request->seourl, 'scripthead' => $request->scripthead, 'scriptBody' => $request->scriptBody, 'publish_date' => $request->date ]);
         
         
-        return redirect()->route('news.index');
+        return redirect()->route('news.edit', [$news->id]);
     }
     
      
