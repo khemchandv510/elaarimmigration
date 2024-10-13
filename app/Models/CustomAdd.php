@@ -19,8 +19,8 @@ class CustomAdd extends Model
         'created_at',
         'updated_at',
         'page_id',
-        'news_id'
-        	
+        'news_id',
+        'blog_id'	
 
     ];
 

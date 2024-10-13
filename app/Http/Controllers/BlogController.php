@@ -44,7 +44,10 @@ class BlogController extends Controller
         
         $subSubCategory =  SubSubCategory::where('sub_category_id', $blog->sub_category_id)->get();
 
-        return view('blogs.edit', compact('category', 'blog', 'subCategory', 'subSubCategory' ));
+        $pageContent = PageContent::where('blog_id', $id)->get();
+        $CustomAdd= CustomAdd::where('blog_id', $id)->get();
+
+        return view('blogs.edit', compact('category', 'blog', 'subCategory', 'subSubCategory', 'pageContent', 'CustomAdd' ));
     }
     
     public function updateBlog(Request $request, $id){

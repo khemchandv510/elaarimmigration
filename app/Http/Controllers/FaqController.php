@@ -53,7 +53,8 @@ class FaqController extends Controller
             'page_id' => $request->page_id,
             'description' => $request->description,
             'image' => isset($imageName) ? $imageName : null,
-            'news_id' => $request->news_id
+            'news_id' => $request->news_id,
+            'blog_id' => $request->blog_id,
 
         ]);
 
@@ -150,7 +151,8 @@ class FaqController extends Controller
             'add_url' => $request->addUrl,
             'product_id' => $request->product_id,
             'page_id' => $request->page_id,
-            'news_id' => $request->news_id
+            'news_id' => $request->news_id,
+            'blog_id' => $request->blog_id
 
             
         ]);
