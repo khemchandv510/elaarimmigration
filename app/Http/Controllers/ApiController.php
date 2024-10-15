@@ -175,11 +175,21 @@ class ApiController extends Controller
     public function allNews(){
         $product = News::all();
          $product->map(function ($item) {
-            // dd( $item);
-            $names  = json_decode( $item->category_id);
+            // dd( $item->category_id);
+            // $names  = json_decode( $item->category_id);
             // dd($names);
-            $item->category_id = Category::where('name', $names)->get();
+            $category_id = Category::wherein('name',["Work","Prince Edward Island Provincial Nominee Program"])->get();
+            $subCategory = subCategory::wherein('name',["Work","Prince Edward Island Provincial Nominee Program"])->get();
 
+            $subSubCategory = subSubCategory::wherein('name',["Work","Prince Edward Island Provincial Nominee Program"])->get();
+
+
+            $allItems = new \Illuminate\Database\Eloquent\Collection; 
+            $allItems = $allItems->concat($category_id);
+            $allItems = $allItems->concat($subCategory);
+            $allItems = $allItems->concat($subSubCategory);
+
+            $item->categories = $allItems;
 
             $item->custom_ads = PageContent::where('news_id', $item->id)->get();
 
@@ -201,6 +211,19 @@ class ApiController extends Controller
 
             $item->pageContent = PageContent::where('news_id', $item->id)->get();
             $item->author = @$item->authorname->auther_name;
+
+            $category_id = Category::wherein('name',["Work","Prince Edward Island Provincial Nominee Program"])->get();
+            $subCategory = subCategory::wherein('name',["Work","Prince Edward Island Provincial Nominee Program"])->get();
+
+            $subSubCategory = subSubCategory::wherein('name',["Work","Prince Edward Island Provincial Nominee Program"])->get();
+            
+            $allItems = new \Illuminate\Database\Eloquent\Collection; 
+            $allItems = $allItems->concat($category_id);
+            $allItems = $allItems->concat($subCategory);
+            $allItems = $allItems->concat($subSubCategory);
+
+            $item->categories = $allItems;
+
             return $item;
         });   
 
@@ -218,17 +241,24 @@ class ApiController extends Controller
             return response()->json(['status' => false, 'message' => 'Not foune news','data' => null], 200);
         }
 
-        // $product->map(function ($item) {
 
             $product->custom_ads = PageContent::where('news_id', $product->id)->get();
 
             $product->pageContent = PageContent::where('news_id', $product->id)->get();
             $product->author = @$product->authorname->auther_name;
-            // return $item;
-        // });   
+          
+            $category_id = Category::wherein('name',["Work","Prince Edward Island Provincial Nominee Program"])->get();
+            $subCategory = subCategory::wherein('name',["Work","Prince Edward Island Provincial Nominee Program"])->get();
 
+            $subSubCategory = subSubCategory::wherein('name',["Work","Prince Edward Island Provincial Nominee Program"])->get();
+            
+            $allItems = new \Illuminate\Database\Eloquent\Collection; 
+            $allItems = $allItems->concat($category_id);
+            $allItems = $allItems->concat($subCategory);
+            $allItems = $allItems->concat($subSubCategory);
 
-        // $product->category_id = $product->mainCategory->name;         
+            $product->categories = $allItems;
+
         return response()->json(['status' => true, 'message' => 'all news','data' => $product], 200);
     }
     
