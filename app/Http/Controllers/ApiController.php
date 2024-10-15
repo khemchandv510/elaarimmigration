@@ -179,6 +179,13 @@ class ApiController extends Controller
             $names  = json_decode( $item->category_id);
             // dd($names);
             $item->category_id = Category::where('name', $names)->get();
+
+
+            $item->custom_ads = PageContent::where('news_id', $item->id)->get();
+
+            $item->pageContent = PageContent::where('news_id', $item->id)->get();
+            $item->author = @$item->authorname->auther_name;
+    
             return $item;
         });   
          
@@ -187,13 +194,17 @@ class ApiController extends Controller
 
     public function NewsCategorywise($category){
         $product = News::whereJsonContains('category_id', $category )->get();
-        //  $product->map(function ($item) {
-        //     // dd( $item);
-        //     $names  = json_decode($item->category_id);
-        //     // dd($names);
-        //     $item->category_id = Category::where('name', $names)->get();
-        //     return $item;
-        // });   
+
+         $product->map(function ($item) {
+
+            $item->custom_ads = PageContent::where('news_id', $item->id)->get();
+
+            $item->pageContent = PageContent::where('news_id', $item->id)->get();
+            $item->author = @$item->authorname->auther_name;
+            return $item;
+        });   
+
+
          
         return response()->json(['status' => true, 'message' => 'all news','data' => $product], 200);
     }
@@ -206,6 +217,17 @@ class ApiController extends Controller
         if(empty($product)){
             return response()->json(['status' => false, 'message' => 'Not foune news','data' => null], 200);
         }
+
+        // $product->map(function ($item) {
+
+            $product->custom_ads = PageContent::where('news_id', $product->id)->get();
+
+            $product->pageContent = PageContent::where('news_id', $product->id)->get();
+            $product->author = @$product->authorname->auther_name;
+            // return $item;
+        // });   
+
+
         // $product->category_id = $product->mainCategory->name;         
         return response()->json(['status' => true, 'message' => 'all news','data' => $product], 200);
     }

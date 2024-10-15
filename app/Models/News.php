@@ -39,6 +39,10 @@ class News extends Model
         return $this->hasMany(SubSubCategory::class);
     }
 
+    public function authorname(){
+        return $this->belongsTo(Author::class, 'auther_name',  'name');
+    }
+
     
 
     
